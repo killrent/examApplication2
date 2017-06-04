@@ -1,0 +1,92 @@
+body {
+    background: #eee;
+    font-family: "Helvetica Neue",
+    Helvetica, Arial,
+    "Hiragino Sans GB",
+    "Hiragino Sans GB W3",
+    "WenQuanYi Micro Hei",
+    "Microsoft YaHei UI",
+    "Microsoft YaHei",
+    sans-serif;
+}
+
+#profile {
+    position: relative;
+    top: -50.4px;
+    padding-left: 10%;
+    padding-top: 52px;
+    height: 292px;
+    margin:auto;
+    background-size: cover;
+    background-image: url(../image/dean-hayton-136567.jpg)
+}
+
+#profile img {
+    border: solid white 2px;
+    position: relative;
+    width: 196px;
+    height: 196px;
+    bottom: 0;
+    z-index: 3;
+}
+
+#profile table {
+    display: inline;
+}
+
+#profile h2,
+#profile p {
+    color: white;
+    margin-left: 72px;
+}
+
+#profile h2 small {
+    color: white;
+    font-size: medium;
+}
+
+#profile-numbers p {
+    text-align: center; margin: 8px 1em;
+}
+
+#profile-numbers div p:first-child {
+    font-size: x-large;
+}
+
+#profile-numbers div p:last-child {
+    color: #ddd;
+}
+
+.nav-stacks a {
+    position: relative;
+}
+
+.nav-stacks a i {
+    position: absolute;
+    right: 1em;
+    top: 1.25em;
+}
+
+.nav-stacks .active {
+    border: solid #eee 1px;
+    background-color: #CFE;
+}
+
+.panel-content {
+    text-align: center;
+}
+
+.panel-heading {
+    position: relative;
+}
+
+.panel-heading > h3 {
+    display: inline-block;
+    margin: 4px 0;
+}
+
+.panel-heading a {
+    position: absolute;
+    top: 1.5em;
+    right: 16px;
+}

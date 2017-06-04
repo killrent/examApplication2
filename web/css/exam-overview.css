@@ -1,0 +1,68 @@
+
+
+.exam-list-container > ul {
+    position: relative;
+    display: flex;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 16px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.exam-list-container > ul > li {
+    padding: 1%;
+    display: flex;
+    width: 32%;
+    margin-bottom: 8px;
+    border: solid 1px #aaa;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.exam-list-container > ul > li > div {
+    display: flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.exam-list-container > ul > li > div > p {
+    margin: 4px 0;
+}
+
+.exam-name {
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    font-weight: bold;
+    flex: 1 0 auto;
+    line-height: 1.75em;
+}
+
+.exam-desc {
+    margin: 1em 0;
+    border: none;
+    color: #666;
+}
+
+.exam-desc > ul {
+    padding: 0;
+    display: flex;
+    list-style: none;
+}
+
+.exam-desc > ul > li {
+    margin-right: 1em;
+}
+
+.exam-time {
+    color: #666;
+}
+
+.不存在的 {
+    color: #555;
+    display: inline-block;
+    margin: 60px;
+}

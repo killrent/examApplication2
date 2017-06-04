@@ -1,0 +1,565 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8">
+        <title>2017 年高考全国 I 卷理综选择题节选</title>
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+        <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/911bb220f7.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/ConnorAtherton/loaders.css/master/loaders.min.css"/>
+
+        <!--<link rel="stylesheet" href="header.css"/>-->
+        <link rel="stylesheet" href="quest-page.css"/>
+        <link rel="stylesheet" href="footer.css"/>
+
+        <script>
+
+            function formatTime(format, second) {
+
+                var h = Math.floor(second / 3600);
+                var m = Math.floor(second % 3600 / 60);
+                var s = second % 60;
+
+                format = format.replace(new RegExp("h+"), h >= 10 ? h : "0" + h);
+                format = format.replace(new RegExp("m+"), m >= 10 ? m : "0" + m);
+                format = format.replace(new RegExp("s+"), s >= 10 ? s : "0" + s);
+
+                return format;
+            }
+
+            const TOTAL_QUESTS = 6;
+            var finished_quest = 0;
+
+            const quest_time = 60;
+            var cur_time = quest_time;
+            const WARNING_TIME = cur_time * 0.2;
+
+            var quest_time_node = $('#quest-time');
+            var quest_footer_nodes = $('.quest-footer');
+            var quest_submit_node = $('#quest-submit');
+            var quest_progress_bar = $('#time-view').find('.progress-bar');
+            var quest_timer;
+
+            var quest_user = $('#quest-user');
+
+            function count_time () {
+
+                quest_time_node.text(formatTime("hh:mm:ss", cur_time));
+                quest_progress_bar.css("width", ((1 - (cur_time / quest_time)) * 100) + "%");
+                cur_time--;
+
+                if (cur_time >= 0) {
+                    if (cur_time == WARNING_TIME) {
+                        quest_time_node.attr('data-content', '考试即将结束, 请注意时间.');
+                        quest_time_node.popover('show');
+                    }
+                    quest_timer = setTimeout(count_time, 1000);
+                } else {
+                    quest_footer_nodes
+                            .children()
+                            .attr('disabled', 'disabled');
+                    quest_time_node.text('考试结束');
+                    quest_time_node.attr('data-content', '别答了, 考完了, 该交了.');
+                    quest_time_node.popover('show');
+                }
+            }
+
+            function sync_sidebar_state (quest_node) {
+                const qid = $(quest_node)
+                        .parent('.quest-footer')
+                        .parent('.quest')
+                        .attr('id');
+
+                const indicator = $('a[href="#' + qid + '"]');
+
+                indicator.find('.badge').remove();
+
+                const opts = $(quest_node).parent().children('button');
+
+                if (opts.hasClass('active')) {
+                    indicator.append('<span class="badge pull-right">已作答</span>');
+                    finished_quest++;
+                }else {
+                    finished_quest--;
+                }
+            }
+
+            function date_receiver(k, v) {
+                var a;
+                if (typeof v === 'string') {
+                    a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(v);
+                    if (a) {
+                        return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4],
+                                +a[5], +a[6]));
+                    }
+                }
+                return v;
+
+            }
+
+
+            var 这么硬编码的吗 = {
+
+                "questName": "2017 年高考全国 I 卷理综选择题节选",
+                "questIntro": "这个作者很懒，"
+
+            }
+
+            var 姑且把试卷答案硬编码在这好了毕竟还没做到后面 = {
+                "q1":{"ans": "B", "val":15},
+                "q2":{"ans": "D", "val":15},
+                "q3":{"ans": "D", "val":15},
+                "q4":{"ans": "C", "val":15},
+                "q5":{"ans": "C", "val":15},
+                "q6":{"ans":"BC", "val":25}
+            };
+
+            function judge () {
+                var score = 0;
+                $('.quest').each(function () {
+                    var ans = String();
+                    var qid = $(this).attr('id');
+                    $(this).find('.quest-footer').children().each(function () {
+                        if ($(this).hasClass('active')) {
+                            ans = ans.concat($(this).text());
+                        }
+                    });
+
+                    if (ans == 姑且把试卷答案硬编码在这好了毕竟还没做到后面[qid].ans) {
+                        score += 姑且把试卷答案硬编码在这好了毕竟还没做到后面[qid].val;
+                    }
+                });
+
+                return score;
+            }
+
+            function init_view() {
+                $('.opt-single').children('button').click(function () {
+
+                    $(this).siblings('button').removeClass("active");
+
+                    $(this).toggleClass("active");
+
+                    sync_sidebar_state(this);
+                });
+
+                $('.opt-multiple').children('button').click(function () {
+
+                    $(this).toggleClass("active");
+
+                    sync_sidebar_state(this);
+                });
+
+                $(window).scroll(function () {
+                    if (quest_time_node.attr('data-content').length != 0) {
+                        quest_time_node.popover('show');
+                    }
+                });
+
+                $('#quest-submit').click(function () {
+                    clearTimeout(quest_timer);
+                    quest_footer_nodes
+                            .children()
+                            .attr('disabled', 'disabled');
+                    quest_time_node.text('考试结束');
+
+                    setTimeout(function () {
+
+                        var modal_msg = $('#scoreModal').find('.modal-dialog .modal-content .modal-body');
+                        var score = judge();
+
+                        modal_msg.find('div').remove();
+
+                        $('#quest-score').text(score + ' /' + ' 100 分');
+                        $('#quest-rank').text('你的成绩击败了全国 ' + score / 100 * 100 + '% 的考生! 真厉害!');
+
+                    }, 1000);
+
+                    quest_user.attr('disabled', 'disabled');
+
+                    quest_time_node.popover('hide');
+                });
+
+                $('#quest-overview').find('ul li a').each(function () {
+                    const qid = $(this).attr('href');
+                    var brief = $(qid + ' .quest-content').find('h4').text();
+                    if (brief.length > 9) {
+                        brief = brief.substr(0, 9) + ' ...';
+                    }
+
+                    $(this).append('<br/><span>' + brief + '</span>');
+                });
+
+                $('#quest-history').click(function () {
+
+                    rank_table.empty();
+
+                    for (var i in history_rank_list) {
+                        var it = history_rank_list[i];
+                        rank_table.append('<tr><td>' + it.name + '</td><td>' + it.date.toLocaleString() + '</td><td>' + it.score + '</td></tr>');
+                    }
+                });
+
+                $('#quest-start').click(start_test);
+
+                $('#quest-main-content').hide();
+            }
+
+
+            function fake_start_test() {
+                console.log('fake_start_test()');
+            }
+
+            function start_test() {
+                console.log("start_test()");
+                $('#quest-main-content').show();
+                count_time();
+            }
+
+            $(document).ready(init_view);
+
+        </script>
+
+    </head>
+    <body data-spy="scroll" data-target="#quest-overview">
+
+        <section class="container" >
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="quest-preview" class="jumbotron">
+                        <h2>2017 年高考全国 I 卷理综选择题节选</h2>
+                        <div class="exam-desc">
+                            <ul>
+                                <li title="作者"><i class="fa fa-pencil" aria-hidden="true"></i> <a href="#">作者</a></li>
+                                <li title="做答人次"><i class="fa fa-pencil-square-o"></i> 10.6k</li>
+                                <li title="题量"><i class="fa fa-file-text-o"></i> 11 道题</li>
+                                <li title="考试时间"><i class="fa fa-clock-o"></i> 120 分钟</li>
+                            </ul>
+                        </div>
+                        <p>作者很懒，没有留下介绍</p>
+                        <button id="quest-start" class="btn btn-primary btn-lg">开始考试</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quest-main-content" class="row">
+                <div class="col-xs-3">
+
+                    <div id="quest-overview" class="panel panel-default" data-spy="affix" data-offset-top="400">
+                        <div class="panel-heading">考试操作</div>
+
+                        <div class="panel-content">
+
+                            <h4>剩余时间： <span
+                                    id="quest-time"
+                                    data-container="body"
+                                    data-toggle="popover"
+                                    data-placement="right"
+                                    data-content=""></span></h4>
+
+                            <div id="time-view" class="progress">
+                                <div class="progress-bar"></div>
+                            </div>
+
+                            <button data-html="true" class="btn btn-primary" id="quest-submit" data-target="#scoreModal" data-toggle="modal">
+                                交卷
+                            </button>
+
+                        </div>
+
+                        <div class="panel-footer">各题导航</div>
+                        <ul class="list-group nav">
+                            <li class="list-group-item"><a href="#q1">1. 单项选择题 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                            <li class="list-group-item"><a href="#q2">2. 单项选择题 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                            <li class="list-group-item"><a href="#q3">3. 单项选择题 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                            <li class="list-group-item"><a href="#q4">4. 单项选择题 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                            <li class="list-group-item"><a href="#q5">5. 单项选择题 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                            <li class="list-group-item"><a href="#q6">6. 多项选择题 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+
+
+                </div>
+
+                <div class="col-xs-9" id="quest-board">
+
+                    <section class="quest" id="q1">
+
+                        <div class="quest-header">
+                            <h3>第 1 题 <small>单项选择题</small></h3>
+                        </div>
+
+                        <hr/>
+
+                        <div class="quest-content">
+                            <h4>下列与细胞相关的叙述，正确的是</h4>
+                            <table>
+                                <tr>
+                                    <td>A. 核糖体、溶酶体都是具有膜结构的细胞器 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>B. 酵母菌的细胞核内含有DNA和RNA两类核酸 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>C. 蓝藻细胞的能量来源于其线粒体有氧呼吸过程 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>D. 在叶绿体中可进行CO2的固定但不能合成ATP &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <hr/>
+
+                        <div class="quest-footer opt-single">
+                            <button class="btn btn-default">A</button>
+                            <button class="btn btn-default">B</button>
+                            <button class="btn btn-default">C</button>
+                            <button class="btn btn-default">D</button>
+                        </div>
+
+                    </section>
+
+                    <section class="quest" id="q2">
+
+                        <div class="quest-header">
+                            <h3>第 2 题 <small>单项选择题</small></h3>
+                        </div>
+
+                        <hr/>
+
+                        <div class="quest-content">
+                            <h4>化学与生活密切相关。下列有关说法错误的是</h4>
+                            <table>
+                                <tr>
+                                    <td>A. 用灼烧的方法可以区分蚕丝和人造纤维 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>B. 食用油反复加热会产生稠环芳烃等有害物质 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>C. 加热能杀死流感病毒是因为蛋白质受热变性 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>D. 医用消毒酒精中乙醇的浓度为95% &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <hr/>
+
+                        <div class="quest-footer opt-single">
+                            <button class="btn btn-default">A</button>
+                            <button class="btn btn-default">B</button>
+                            <button class="btn btn-default">C</button>
+                            <button class="btn btn-default">D</button>
+                        </div>
+
+                    </section>
+
+                    <section class="quest" id="q3">
+
+                        <div class="quest-header">
+                            <h3>第 3 题 <small>单项选择题</small></h3>
+                        </div>
+                        <hr/>
+
+                        <div class="quest-content">
+                            <h4>一平行电容器两极板之间充满云母介质，接在恒压直流电源上，若将云母介质移出，则电容器</h4>
+                            <table>
+                                <tr>
+                                    <td>A. 极板上的电荷量变大，极板间的电场强度变大 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>B. 极板上的电荷量变小，极板间的电场强度变大 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>C. 极板上的电荷量变大，极板间的电场强度不变 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>D. 极板上的电荷量变小，极板间的电场强度不变 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <hr/>
+
+                        <div class="quest-footer opt-single">
+                            <button class="btn btn-default">A</button>
+                            <button class="btn btn-default">B</button>
+                            <button class="btn btn-default">C</button>
+                            <button class="btn btn-default">D</button>
+                        </div>
+
+                    </section>
+
+                    <section class="quest" id="q4">
+
+                        <div class="quest-header">
+                            <h3>第 4 题 <small>单项选择题</small></h3>
+                        </div>
+
+                        <hr/>
+
+                        <div class="quest-content">
+                            <h4>离子泵是一种具有ATP水解酶活性的载体蛋白，能利用水解ATP释放的能量跨膜运输离子。下列叙述正确的是</h4>
+                            <table>
+                                <tr>
+                                    <td>A. 离子通过离子泵的跨膜运输属于协助扩散 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>B. 离子通过离子泵的跨膜运输是顺着浓度梯度进行的 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>C. 动物一氧化碳中毒会降低离子泵跨膜运输离子的速率 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>D. 加入蛋白质变性剂会提高离子泵跨膜运输离子的速率 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <hr/>
+
+                        <div class="quest-footer opt-single">
+                            <button class="btn btn-default">A</button>
+                            <button class="btn btn-default">B</button>
+                            <button class="btn btn-default">C</button>
+                            <button class="btn btn-default">D</button>
+                        </div>
+
+                    </section>
+
+                    <section class="quest" id="q5">
+
+                        <div class="quest-header">
+                            <h3>第 5 题 <small>单项选择题</small></h3>
+                        </div>
+
+                        <hr/>
+
+                        <div class="quest-content">
+                            <h4>下列实验操作能达到实验目的的是</h4>
+                            <table>
+                                <tr>
+                                    <td>A. 用长颈漏斗分离出乙酸与乙醇反应的产物 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>B. 用向上排空气法收集铜粉与稀硝酸反应产生的 NO &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>C. 配制氯化铁溶液时，将氯化铁溶解在较浓的盐酸中再加水稀释 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>D. 将 Cl2 与 HCl 混合气体通过饱和食盐水可得到纯净的 Cl2 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <hr/>
+
+                        <div class="quest-footer opt-single">
+                            <button class="btn btn-default">A</button>
+                            <button class="btn btn-default">B</button>
+                            <button class="btn btn-default">C</button>
+                            <button class="btn btn-default">D</button>
+                        </div>
+
+                    </section>
+
+                    <section class="quest" id="q6">
+
+                        <div class="quest-header">
+                            <h3>第 6 题 <small>多项选择题</small></h3>
+                        </div>
+
+                        <hr/>
+
+                        <div class="quest-content">
+                            <h4>一质点做匀速直线运动，现对其施加一恒力，且原来作用在质点上的力不发生改变，则</h4>
+                            <table>
+                                <tr>
+                                    <td>A. 质点速度的方向总是与该恒力的方向相同 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>B. 质点速度的方向不可能总是与该恒力的方向垂直 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>C. 质点加速度的方向总是与该恒力的方向相同 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>D. 质点单位时间内速率的变化量总是不变 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <hr/>
+
+                        <div class="quest-footer opt-multiple">
+                            <button class="btn btn-default">A</button>
+                            <button class="btn btn-default">B</button>
+                            <button class="btn btn-default">C</button>
+                            <button class="btn btn-default">D</button>
+                        </div>
+
+                    </section>
+
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="row">
+
+                    <p>Enimaxe - 在线考试系统</p>
+
+                    <p>
+                        由
+                        <a href="#">@杨家淇</a>,
+                        <a href="#">@冯景恒</a>, 和
+                        <a href="#">@谭达强</a>
+                        为提交 WEB 程序设计期末作业而制作.
+                    </p>
+
+                    <p class="mg-4 c-bg">嘴强考王系统小组 / 2017 / 春 </p>
+
+                </div>
+            </div>
+        </footer>
+
+        <div class="modal fade" id="historyModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">历史成绩</h4>
+                    </div>
+                    <div class="modal-body" style="overflow-y: auto">
+                        <table id="rank-table" class="table">
+                            <thead>
+                            <tr>
+                                <th>用户名</th>
+                                <th>考试时间</th>
+                                <th>成绩</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="scoreModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" style="text-align: center">你的成绩</h4>
+                    </div>
+                    <div class="modal-body" style="text-align: center">
+                        <div style="position: fixed; left: 48%; top: 45%;" class="ball-spin-fade-loader">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <p id="quest-score" style="font-size: xx-large; padding: 12% 0;">
+                        </p>
+                        <p id="quest-rank">请勿关闭页面</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">查看详细</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

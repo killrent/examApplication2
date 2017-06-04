@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<title>Enimaxe-属于你的考试</title>
+	
+	<script src="js/jquery-3.2.1.min.js"></script>	
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/cssForSearch.css">
+	<script type="text/javascript">  
+
+		function haveScroll(){  
+			var haveScroll=0;
+		    $("body").scrollTop(1);//控制滚动条下移10px  
+		    if( $("body").scrollTop()>0 )
+		        haveScroll=1;  
+		    $("body").scrollTop(0);//滚动条返回顶部  
+		    return haveScroll;
+		}
+
+
+
+		$(function(){
+
+			$("#searchByType #paper").button("toggle");
+
+
+		 	$(window).resize(function() {
+			  if(haveScroll()){
+			  	var c = $(document).height()-$(window).height();
+			  	var a =$("#searchResultsWarpper .panel-body").height();
+			  	if((a-c)>200)
+			  		$("#searchResultsWarpper .panel-body").height(a-c);
+			  }else{
+			  	var b = $("#searchResultsWarpper .panel-body").height()+Math.abs($(document.body).height()-$(window).height())
+			  	$("#searchResultsWarpper .panel-body").height(b);
+			  }
+
+			});
+			//关键字改变绑定
+			$("#searchByWord").bind("input propertychange change",function(event){
+				var text = $(this).val();
+       			$("#wordLabel span:first-child ").text(text);
+			});
+
+		 	//科目多选绑定
+			$(".checkbox input").change(function(){
+				var isChecked = false;
+				var boxText= "";
+				boxText = $(this).val();
+				if($(this).is(':checked')) 
+    				isChecked=true;
+
+    			 $(".subjectLabel").each(function(){
+    			 	if(boxText==$(this).attr("value")){
+    			 		if(isChecked)
+    			 			$(this).removeClass("hidden");			
+    			 		else
+    			 			$(this).addClass("hidden");
+    					return false;
+    				}
+    			})
+    			
+			});
+
+			$(".subjectLabel .glyphicon-remove").click(function(){
+				var value = $(this).parent("span").attr("value");
+				$(".checkbox input").each(function(){
+					if($(this).val()==value){
+						$(this).prop("checked",false);
+						return false;
+					}
+				})
+				$(this).parent("span").addClass("hidden");
+
+			});
+
+			//试卷类型绑定
+			$("#searchByType label").click(function(){
+				var text = $(this).attr("value");
+				$("#typeLabel span:first-child ").text(text);
+			})
+			
+			$("#typeLabel").click(function(){
+				$("#searchByType label:not(.active)").button("toggle");
+				var text = $("#searchByType .active").attr("value");
+				$("#typeLabel span:first-child ").text(text);
+				
+			});
+			
+		})
+	</script>  
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<!-- 侧边搜索栏 -->
+			<div id="searchSider" class="col-lg-3 panel-group ">
+				<div class="panel panel-info">
+					<div class="panel-heading" data-toggle="collapse" data-parent="#searchSider" href="#searchSiderCollapse">
+						<h4 class="panel-title text-center" >
+							条件搜索栏<span class="caret"></span>
+						</h4>
+					</div>
+					<div id="searchSiderCollapse" class="panel-collapse collapse in">
+						<div class="panel-body">
+						<form role="form" >
+							<div class="form-group">
+								<label for="searchByWord">关键字搜索</label>
+								<input id="searchByWord" class="form-control" type="text" placeholder="请输搜索入关键字">
+							</div><!-- form-group -->
+							<div class="form-group">
+								<label for="searchByType">类型</label>
+								<br>
+								<div id="searchByType" class="btn-group" data-toggle="buttons">
+								    <label id="paper" class="btn btn-primary" value="试卷">
+								        <input type="radio" name="options" id="option1" >试卷
+								    </label>
+								    <label id="question" class="btn btn-primary" value="题目">
+								        <input type="radio" name="options" id="option2"> 题目
+								    </label>
+								</div>
+							</div><!-- form-group -->
+							
+							<div class="form-group">
+								<!-- <label for="searchBySubject">科目</label>
+								<select id="searchBySubject" class="fcom.controltrol">
+							      <option>未指定</option>
+							      <option>2</option>
+							      <option>3</option>
+							      <option>4</option>
+							      <option>5</option>
+							    </select> --> 
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox"  value="JAVA">JAVA
+								  </label>
+								</div>
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox"  value="高等数学">高等数学
+								  </label>
+								</div>
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox" value="英语">英语
+								  </label>
+								</div>
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox" value="C语言">C语言
+								  </label>
+								</div>
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox" value="思想道德">思想道德
+								</div>
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox" value="毛概">毛概
+								  </label>
+								</div>
+								
+							</div>
+							<div class="form-group">
+								<label for="orderWay">排序方式</label>
+								<select id="orderWay" class="form-control">
+							      <option>收藏数</option>
+							      <option>发布时间</option>
+							    </select>
+							</div>
+							<button class="btn btn-block btn-primary">Go！</button>
+						</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 搜索结果与标签 -->
+			<div id="searchWarpper" class="col-lg-9">
+				<!-- 搜索结果 -->
+				<div id="searchResultsWarpper">
+					<div class="panel panel-default">
+						<!-- 标签区域 -->
+					    <div id="searchTabsWarpper" class="panel-heading label-group">
+						    <span id="wordLabel" class="label label-default " ><span>标签1</span><span class="glyphicon glyphicon-remove "></span></span>
+							<span id="typeLabel" class="label label-primary"><span>试卷</span>  <span class="glyphicon glyphicon-retweet"></span></span>
+							<span id="orderLabel" class="label label-success">标签3<span class="glyphicon glyphicon-remove"></span></span>
+							<span  class="subjectLabel label label-default hidden " value="JAVA" >Java <span class="glyphicon glyphicon-remove "></span></span>
+							<span  class="subjectLabel label label-default hidden" value="高等数学" >高等数学 <span class="glyphicon glyphicon-remove "> </span></span>
+							<span  class="subjectLabel label label-default hidden" value="英语" >英语 <span class="glyphicon glyphicon-remove "></span></span>
+							<span  class="subjectLabel label label-default hidden" value="C语言" >C语言 <span class="glyphicon glyphicon-remove "></span></span>
+							<span  class="subjectLabel label label-default hidden" value="思想道德" >思想道德 <span class="glyphicon glyphicon-remove "></span></span>
+							<span  class="subjectLabel label label-default hidden" value="毛概" >毛概 <span class="glyphicon glyphicon-remove "></span></span>
+							<!-- <span id="" class="label label-info">标签4 <span class="glyphicon glyphicon-remove"></span></span> -->
+							
+					    </div>
+					    <div class="panel-body ">
+					       
+						        <div class="panel panel-info">
+						        	<div class="panel-heading" >
+						        		<div class="row">
+						        			<div class="col-xs-11" style="height:50px;overflow:hidden;">试题题目试题题目试题题目试题题目试题题目试题题目试题题目试题题目试题题目试题题目试题题目试题题目试题题目试题题目试题题目试题题目</div>
+						        			<div class="glyphicon glyphicon-plus col-xs-1" title="添加到收藏"></div>
+						        			<div class="col-xs-12 col-md-4">发布者：<a name="author">XXX</a></div>
+						        			<div class="col-xs-12 col-md-4">时间：<span name="time">2017-5-12</span></div>
+						        			<div class="col-xs-12 col-md-4">类别：<span name="time">JAVA</span></div>
+											
+						        		</div>
+						        		
+						        		
+										<div class="btn btn-block btn-success text-center" data-toggle="collapse" data-parent="#searchResults" href="#searchResultCollapse1"><span class="glyphicon glyphicon-circle-arrow-down"></span></div>
+						        	</div>
+						        	<div id="searchResultCollapse1" class="panel-collapse collapse">
+						        		这是题目的题干这是题目的题干这是题目的题干这是题目的题干这是题目的题干这是题目的题干这是题目的题干这是题目的题干这是题目的题干这是题目的题干这是题目的题干
+						        	</div>
+						        </div>
+					    </div>
+					</div>
+					 
+					
+				</div>
+			</div>
+		</div><!-- row -->
+	</div><!-- container -->
+</body>
+</html>

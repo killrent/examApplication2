@@ -1,0 +1,15 @@
+# Created by .ignore support plugin (hsz.mobi)
+<<<<<<< Updated upstream
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+=======
+.idea/workspace.xml
+out/
+web/bootstrap/node_modules/
+>>>>>>> Stashed changes

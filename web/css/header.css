@@ -1,0 +1,43 @@
+.navbar-inverse {
+    z-index: 2;
+    border: none;
+    background: linear-gradient(#000, transparent);
+    margin: 0;
+    padding: 0 8%;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #eee;
+}
+
+#header-contents ul li > a {
+    color: #eee;
+}
+
+#header-contents ul .active > a {
+    color: #fff;
+    background: linear-gradient(#000, transparent);
+}
+
+#header-contents .navbar-right li a img {
+    position: relative;
+    margin: 0 8px;
+    top: 0;
+    width: 40px;
+    height: 40px;
+}
+
+
+#search-keyword {
+    background: transparent;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    border-bottom: solid #fff 1px;
+}
+
+#search-keyword::-moz-placeholder,
+#search-keyword::-webkit-input-placeholder,
+#search-keyword:-ms-input-placeholder {
+    color: #eee; !important;
+}

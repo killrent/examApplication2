@@ -1,0 +1,19 @@
+footer {
+    padding: 1%;
+    background: #333;
+    color: #eee;
+    bottom: 0;
+}
+
+footer p:first-child {
+    color: #fff;
+}
+
+footer p {
+    margin: 4px;
+    color: #aaa;
+}
+
+footer p a {
+    color: #fff;
+}
