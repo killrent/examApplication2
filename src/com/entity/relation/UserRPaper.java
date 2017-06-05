@@ -1,15 +1,32 @@
 package com.entity.relation;
 
+import com.utills.JDBCUtils.SQLColumn;
+import com.utills.JDBCUtils.SQLIgnore;
+
 /**
  * Created by 10388 on 2017/6/5.
  */
 public class UserRPaper {
 
     private int id;
+
+    @SQLColumn("who")
     private int userId;
+
+    @SQLColumn("which")
     private int paperId;
+
+    @SQLColumn("submit_time")
     private String time;
+
+    @SQLColumn("sec_used")
+    private int timeUsed;
+
+    @SQLColumn("grade")
     private int score;
+
+    public UserRPaper() {
+    }
 
     public int getId() {
         return id;
