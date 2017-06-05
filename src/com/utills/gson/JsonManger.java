@@ -8,7 +8,7 @@ import java.io.*;
 
 public class JsonManger {
 
-    private final String DATA_PATH = "G:\\project\\Web\\examApplication\\src\\com\\utills\\gson\\datum.txt";
+    private final String DATA_PATH = "G:\\project\\Web\\examApplication\\src\\com\\utills\\gson\\datum.json";
 
     public void saveDataIntoJson(Data data) throws IOException {
 
@@ -17,15 +17,10 @@ public class JsonManger {
         String sets = gson.toJson(data);
         System.out.print(sets);
 
-//        FileWriter fw = new FileWriter(DATA_PATH);
-//        PrintWriter out = new PrintWriter(fw);
-
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(DATA_PATH), "UTF-8"));
 
         out.write(sets);
-//        out.println();
-//        fw.close();
         out.close();
     }
 

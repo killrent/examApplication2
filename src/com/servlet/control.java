@@ -47,7 +47,6 @@ public class control extends HttpServlet {
             e.printStackTrace();
         }
 
-
         out.print(status);
         out.flush();
         out.close();
@@ -100,15 +99,7 @@ public class control extends HttpServlet {
 
                     userTransferBean = (UserTransferBean) session.getAttribute("loginUser");
 
-                    Gson gson = new GsonBuilder().create();
-
-                    String user = gson.toJson(userTransferBean);
-
-                    System.out.print(user);
-
-                    JSONObject obj =  JSONObject.fromObject(user);
-
-                    status.put("userObj",obj);
+                    status.put("userObj",userTransferBean);
 
                 }else{
                     status.put("email",null);

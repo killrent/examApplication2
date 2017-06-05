@@ -1,6 +1,8 @@
 package com.test;
 
 import com.entity.Data;
+import com.entity.PaperBean;
+import com.entity.relation.UserRPaper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.model.Interfaces.LoginLogic;
@@ -16,8 +18,17 @@ public class ModelTest {
         Data data = jsonManger.loadDataFormJson();
         //System.out.print(data.getUSER()[0].getEmail());
 
-        LoginLogic loginLogic = new LoginLogicTest();
+        PaperBean[] papers = data.getPAPER();
 
-        loginLogic.checkEmail("123@qq.com");
+        LoginLogicTest loginLogic = new LoginLogicTest();
+
+        String email = "123@qq.com";
+
+        UserRPaper userRPaper[] = loginLogic.getUserRPaper(2);
+
+        for(UserRPaper x : userRPaper){
+            System.out.println(x.getId()+":"+ x.getPaperId());
+        }
+
     }
 }

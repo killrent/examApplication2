@@ -17,7 +17,9 @@ $(document).ready(function () {
 
             var obj = data.userObj;
 
-            console.log(obj);
+            var javaObj = data.javaObj;
+
+            console.log(javaObj);
 
             if(email !== undefined){
                 $ul0.css("display","none");
