@@ -2,9 +2,6 @@ package com.model.Interfaces;
 
 import com.entity.UserTransferBean;
 
-/**
- * Created by 10388 on 2017/5/29.
- */
 public interface LoginLogic {
 
     //TODO 判断邮箱是否被占用

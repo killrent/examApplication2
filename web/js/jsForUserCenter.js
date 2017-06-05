@@ -1,6 +1,5 @@
-/**
- * Created by 10388 on 2017/6/4.
- */
+
+
 $(document).ready(function () {
 
     var $a = $('#user-href');

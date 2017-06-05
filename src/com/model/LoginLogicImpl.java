@@ -6,10 +6,8 @@
 //import java.sql.PreparedStatement;
 //import java.sql.ResultSet;
 //
-///**
-// * Created by Tnecesoc on 2017/5/30.
-// */
-//public class LoginLogicImpl extends GeneralRepository implements LoginLogic {
+//
+//public class LoginLogicImpl extends GeneralRepository {
 //
 //    private static final String TABLE = "user";
 //
