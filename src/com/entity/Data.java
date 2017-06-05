@@ -1,12 +1,21 @@
 package com.entity;
 
-/**
- * Created by 10388 on 2017/6/1.
- */
+import com.entity.relation.UserRPaper;
+
+
 public class Data {
     private UserBean[] USER;
     private PaperBean[] PAPER;
     private QuestionBean[] QUESTION;
+    private UserRPaper[] USER_PAPER;
+
+    public UserRPaper[] getUSER_PAPER() {
+        return USER_PAPER;
+    }
+
+    public void setUSER_PAPER(UserRPaper[] USER_PAPER) {
+        this.USER_PAPER = USER_PAPER;
+    }
 
     public UserBean[] getUSER() {
         return USER;
