@@ -35,7 +35,28 @@ public class ModelTest {
 
         Gson gson = new Gson();
 
+        // already has this email.
+        System.out.println(logic.checkEmail("15dqtan@stu.edu.cn"));
+
+        // have no this email yet.
+        System.out.println(logic.checkEmail("you are doooomed!"));
+
+        // ordinary sign up
+        System.out.println(gson.toJson(logic.signUp("assault65535@gmail.com", "123456")));
+
+        // try to sign up a duplicate account
+        System.out.println(gson.toJson(logic.signUp("15dqtan@stu.edu.cn", "1234567")));
+
+        // Access accepted, has former records.
+        System.out.println(gson.toJson(logic.signIn("15dqtan@stu.edu.cn", "123456")));
+
+        // Access accepted, no exam records.
         System.out.println(gson.toJson(logic.signIn("10086@qq.com", "123456")));
 
+        // Access denied, wrong password.
+        System.out.println(gson.toJson(logic.signIn("10086@qq.com", "1234567")));
+
+        // Access denied, no such email.
+        System.out.println(gson.toJson(logic.signIn("100861@qq.com", "123456")));
     }
 }

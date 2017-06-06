@@ -52,10 +52,13 @@ public class ResultSets {
 
 
     public static boolean isEmptySet(ResultSet which) throws SQLException {
-        boolean ans = !which.next();
-        which.first();
+        boolean hasNext = which.next();
 
-        return ans;
+        if (hasNext) {
+            which.first();
+        }
+
+        return !hasNext;
     }
 
     public static <T> T fromRow(ResultSet resultSet, T convertObject, Class<T> baseClass) throws SQLException {

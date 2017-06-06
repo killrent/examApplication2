@@ -10,7 +10,6 @@ import com.utills.JDBCUtils.ResultSets;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
 public class LoginLogicImpl extends GeneralRepository implements LoginLogic {
 
     @Override
@@ -25,7 +24,6 @@ public class LoginLogicImpl extends GeneralRepository implements LoginLogic {
                     "SELECT * FROM `user` WHERE email = ?");
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
-
             ans[0] = ResultSets.isEmptySet(resultSet);
             resultSet.close();
         });
@@ -39,7 +37,21 @@ public class LoginLogicImpl extends GeneralRepository implements LoginLogic {
         ans[0] = null;
 
         doSQLAction(() -> {
+
             PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM `user` WHERE email = ?");
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+
+            ans[0] = ResultSets.fromRow(resultSet, null, UserTransferBean.class);
+
+            if (ans[0] != null) {
+                ans[0].setPaperBean(null);
+                ans[0].setUserRPapers(null);
+                return;
+            }
+
+            statement = connection.prepareStatement(
                     "INSERT INTO `user` (email, password) VALUE (?, ?)");
             statement.setString(1, email);
             statement.setString(2, pwd);
@@ -49,13 +61,7 @@ public class LoginLogicImpl extends GeneralRepository implements LoginLogic {
             statement = connection.prepareStatement(
                     "SELECT * FROM `user` WHERE email = ?");
             statement.setString(1, email);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (ResultSets.isEmptySet(resultSet)) {
-                resultSet.close();
-                statement.close();
-                return;
-            }
+            resultSet = statement.executeQuery();
 
             ans[0] = ResultSets.fromRow(resultSet, null, UserTransferBean.class);
             resultSet.close();
