@@ -15,7 +15,10 @@ public class UserBean {
         this.signature = signature;
     }
 
-    public UserBean(int id, String name, String email, String password,String signature) {
+    public UserBean() {
+    }
+
+    public UserBean(int id, String name, String email, String password, String signature) {
         this.id = id;
         this.name = name;
         this.email = email;

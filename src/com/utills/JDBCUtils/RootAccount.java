@@ -5,8 +5,8 @@ package com.utills.JDBCUtils;
  */
 public class RootAccount {
 
-    private final static String username = "";
-    private static String password = "";
+    private final static String username = "root";
+    private static String password = "a4294967296";
 
     static String getUsername() {
         return username;

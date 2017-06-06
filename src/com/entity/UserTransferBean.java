@@ -1,6 +1,10 @@
 package com.entity;
 
 import com.entity.relation.UserRPaper;
+import com.utills.JDBCUtils.SQLIgnore;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 10388 on 2017/6/4.
@@ -28,8 +32,20 @@ public class UserTransferBean {
     public void setUserRPapers(UserRPaper[] userRPapers) {
         this.userRPapers = userRPapers;
     }
+    
+    @SQLIgnore
+    private List<UserRPaper> userRPapers;
 
-    public UserTransferBean(int id, String name, String email, String signature,UserRPaper[] userRPapers,PaperBean[] paperBean) {
+    @SQLIgnore
+    private List<PaperBean> paperBean;
+
+    public UserTransferBean() {
+        userRPapers = new ArrayList<>();
+        paperBean = new ArrayList<>();
+    }
+
+    public UserTransferBean(int id, String name, String email, String signature, UserRPaper[] userRPapers, PaperBean[] paperBean) {
+        this();
         this.id = id;
         this.name = name;
         this.email = email;
@@ -44,6 +60,30 @@ public class UserTransferBean {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<UserRPaper> getUserRPapers() {
+        return userRPapers;
+    }
+
+    public void setUserRPapers(List<UserRPaper> userRPapers) {
+        this.userRPapers = userRPapers;
+    }
+
+    public List<PaperBean> getPaperBean() {
+        return paperBean;
+    }
+
+    public void setPaperBean(List<PaperBean> paperBean) {
+        this.paperBean = paperBean;
     }
 
     private String signature;
