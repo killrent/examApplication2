@@ -3,34 +3,15 @@ package com.model;
 import com.entity.PaperBean;
 import com.entity.UserTransferBean;
 import com.entity.relation.UserRPaper;
-import com.utills.JDBCUtils.GeneralRepository;
 import com.model.Interfaces.LoginLogic;
+import com.utills.JDBCUtils.GeneralRepository;
 import com.utills.JDBCUtils.ResultSets;
 
-import javax.jws.soap.SOAPBinding;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
 public class LoginLogicImpl extends GeneralRepository implements LoginLogic {
-
-    public LoginLogicImpl() {
-
-//        doSQLAction(() -> {
-//            PreparedStatement statement = connection.prepareStatement(
-//                    "CREATE TABLE IF NOT EXISTS user " +
-//                    "(\n" +
-//                    "  id INT(11) PRIMARY KEY UNIQUE NOT NULL AUTO_INCREMENT,\n" +
-//                    "  name VARCHAR(20)," +
-//                    "  email VARCHAR(255) UNIQUE NOT NULL," +
-//                    "  password VARCHAR(20) NOT NULL" +
-//                    ")");
-//
-//            statement.execute();
-//        });
-
-
-    }
 
     @Override
     public boolean checkEmail(String email) {
@@ -45,7 +26,7 @@ public class LoginLogicImpl extends GeneralRepository implements LoginLogic {
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
 
-            ans[0] = !resultSet.next();
+            ans[0] = ResultSets.isEmptySet(resultSet);
             resultSet.close();
         });
         return ans[0];
@@ -69,6 +50,15 @@ public class LoginLogicImpl extends GeneralRepository implements LoginLogic {
                     "SELECT * FROM `user` WHERE email = ?");
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
+
+            if (ResultSets.isEmptySet(resultSet)) {
+                resultSet.close();
+                statement.close();
+                return;
+            }
+
+            ans[0] = ResultSets.fromRow(resultSet, null, UserTransferBean.class);
+            resultSet.close();
             statement.close();
         });
 
@@ -88,16 +78,15 @@ public class LoginLogicImpl extends GeneralRepository implements LoginLogic {
             statement.setString(2, pwd);
             ResultSet resultSet = statement.executeQuery();
 
-            if (!resultSet.next()) {
-                resultSet.close();
-                statement.close();
+            ans[0] = ResultSets.fromRow(resultSet, null, UserTransferBean.class);
+            resultSet.close();
+            statement.close();
+
+            if (ans[0] == null) {
                 return;
             }
 
-            ans[0] = ResultSets.fromRow(resultSet, null, UserTransferBean.class);
-            int id = resultSet.getInt("id");
-            resultSet.close();
-            statement.close();
+            int id = ans[0].getId();
 
             statement = connection.prepareStatement(
                     "SELECT * FROM `paper_use` WHERE who = ?");

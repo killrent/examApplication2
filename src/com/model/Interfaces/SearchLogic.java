@@ -10,9 +10,7 @@ import java.util.List;
  */
 public interface SearchLogic {
 
-    List<PaperBean> getPaperBean(String keyword, @Deprecated int sortway);
-
-    List<QuestionBean> getQuestionBeanByPaperName(String keyword, int sortway);
+    List<PaperBean> getPaperBean(String keyword, int sortway);
 
     List<QuestionBean> getQuestionBeanByPaperId(int id, int sortway);
 

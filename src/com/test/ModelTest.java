@@ -35,7 +35,7 @@ public class ModelTest {
 
         Gson gson = new Gson();
 
-        System.out.println(gson.toJson(logic.signIn("15dqtan@stu.edu.cn1", "123456")));
+        System.out.println(gson.toJson(logic.signIn("10086@qq.com", "123456")));
 
     }
 }

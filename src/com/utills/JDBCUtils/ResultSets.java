@@ -51,17 +51,25 @@ public class ResultSets {
     }
 
 
+    public static boolean isEmptySet(ResultSet which) throws SQLException {
+        boolean ans = !which.next();
+        which.first();
+
+        return ans;
+    }
+
     public static <T> T fromRow(ResultSet resultSet, T convertObject, Class<T> baseClass) throws SQLException {
 
         try {
+
+            if (isEmptySet(resultSet)) {
+                return convertObject;
+            }
 
             if (convertObject == null) {
                 convertObject = baseClass.newInstance();
             }
 
-            if (!resultSet.next()) {
-                return convertObject;
-            }
 
             for (Field field : baseClass.getDeclaredFields()) {
 
@@ -92,7 +100,7 @@ public class ResultSets {
 
         try {
 
-            if (!resultSet.next()) {
+            if (isEmptySet(resultSet)) {
                 return collection;
             }
 
