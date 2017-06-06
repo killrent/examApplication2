@@ -23,7 +23,7 @@ public class PaperBean {
 
     @SQLIgnore
     private int click;
-
+    
     public int getId() {
         return id;
     }

@@ -14,7 +14,25 @@ public class UserTransferBean {
     private int id;
     private String name;
     private String email;
+    private UserRPaper[] userRPapers;
+    private PaperBean[] paperBean;
 
+    public PaperBean[] getPaperBean() {
+        return paperBean;
+    }
+
+    public void setPaperBean(PaperBean[] paperBean) {
+        this.paperBean = paperBean;
+    }
+
+    public UserRPaper[] getUserRPapers() {
+        return userRPapers;
+    }
+
+    public void setUserRPapers(UserRPaper[] userRPapers) {
+        this.userRPapers = userRPapers;
+    }
+    
     @SQLIgnore
     private List<UserRPaper> userRPapers;
 
@@ -32,6 +50,16 @@ public class UserTransferBean {
         this.name = name;
         this.email = email;
         this.signature = signature;
+        this.userRPapers = userRPapers;
+        this.paperBean = paperBean;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

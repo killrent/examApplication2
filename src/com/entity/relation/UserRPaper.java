@@ -29,7 +29,7 @@ public class UserRPaper {
 
     public UserRPaper() {
     }
-
+    
     public int getId() {
         return id;
     }
@@ -69,7 +69,7 @@ public class UserRPaper {
     public void setTimeUsed(int timeUsed) {
         this.timeUsed = timeUsed;
     }
-
+    
     public int getScore() {
         return score;
     }
