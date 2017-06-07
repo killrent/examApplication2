@@ -24,11 +24,11 @@ public class ModelTest {
 
         String email = "123@qq.com";
 
-        UserRPaper userRPaper[] = loginLogic.getUserRPaper(2);
-
-        for(UserRPaper x : userRPaper){
-            System.out.println(x.getId()+":"+ x.getPaperId());
-        }
+//        UserRPaper userRPaper[] = loginLogic.getUserRPaper(2);
+//
+//        for(UserRPaper x : userRPaper){
+//            System.out.println(x.getId()+":"+ x.getPaperId());
+//        }
 
     }
 }

@@ -2,18 +2,13 @@ package com.entity;
 
 import java.util.List;
 
-/**
- * Created by 10388 on 2017/6/1.
- */
 public class QuestionBean {
     private int id;
     private int type;
     private String content;
+
     private List<String> items;
     private List<Integer> answer;
-
-    public QuestionBean() {
-    }
 
     public int getId() {
         return id;
