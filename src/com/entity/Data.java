@@ -2,42 +2,45 @@ package com.entity;
 
 import com.entity.relation.UserRPaper;
 
+import java.util.List;
+
 
 public class Data {
-    private UserBean[] USER;
-    private PaperBean[] PAPER;
-    private QuestionBean[] QUESTION;
-    private UserRPaper[] USER_PAPER;
 
-    public UserRPaper[] getUSER_PAPER() {
-        return USER_PAPER;
-    }
+    private List<UserBean> USER;
+    private List<PaperBean> PAPER;
+    private List<QuestionBean> QUESTION;
+    private List<UserRPaper> USER_PAPER;
 
-    public void setUSER_PAPER(UserRPaper[] USER_PAPER) {
-        this.USER_PAPER = USER_PAPER;
-    }
-
-    public UserBean[] getUSER() {
+    public List<UserBean> getUSER() {
         return USER;
     }
 
-    public void setUSER(UserBean[] USER) {
+    public void setUSER(List<UserBean> USER) {
         this.USER = USER;
     }
 
-    public PaperBean[] getPAPER() {
+    public List<PaperBean> getPAPER() {
         return PAPER;
     }
 
-    public void setPAPER(PaperBean[] PAPER) {
+    public void setPAPER(List<PaperBean> PAPER) {
         this.PAPER = PAPER;
     }
 
-    public QuestionBean[] getQUESTION() {
+    public List<QuestionBean> getQUESTION() {
         return QUESTION;
     }
 
-    public void setQUESTION(QuestionBean[] QUESTION) {
+    public void setQUESTION(List<QuestionBean> QUESTION) {
         this.QUESTION = QUESTION;
+    }
+
+    public List<UserRPaper> getUSER_PAPER() {
+        return USER_PAPER;
+    }
+
+    public void setUSER_PAPER(List<UserRPaper> USER_PAPER) {
+        this.USER_PAPER = USER_PAPER;
     }
 }

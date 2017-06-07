@@ -14,14 +14,12 @@ import java.util.List;
 
 public class LoginLogicTest implements LoginLogic {
 
-    final int MAX_RECORD_LENGTH = 500;
-
     private Data data;
-    private UserBean[] user;
-    private PaperBean[] paper;
-    private QuestionBean[] question;
+    private List<UserBean> user;
+    private List<PaperBean> paper;
+    private List<QuestionBean> question;
 
-    private UserRPaper[] userRPapers;
+    private List<UserRPaper> userRPapers;
 
     private JsonManger jsonManger;
 
@@ -56,13 +54,11 @@ public class LoginLogicTest implements LoginLogic {
     @Override
     public UserTransferBean signUp(String email, String password) {
 
-        user = Arrays.copyOf(user,user.length + 1);
+        user.add(new UserBean(user.size(),"新人驾到",email,password,"新兵上任三桶水！"));
 
-        user[user.length - 1] = new UserBean(user.length,"新人驾到",email,password,"新兵上任三桶水！");
 
-        data.setUSER(user);
+        UserTransferBean userTransferBean = new UserTransferBean(user.size(),"新人驾到",email,"新兵上台三桶水！",null,null);
 
-        UserTransferBean userTransferBean = new UserTransferBean(user.length,"新人驾到",email,"新兵上任三桶水！",null,null);
 
         try {
             jsonManger.saveDataIntoJson(data);
@@ -76,7 +72,7 @@ public class LoginLogicTest implements LoginLogic {
     @Override
     public UserTransferBean signIn(String email, String password) {
 
-        UserRPaper[] record;
+        List<UserRPaper> record;
 
         for(UserBean x: user){
             if(email.equals((x.getEmail())) && password.equals(x.getPassword())){
@@ -88,7 +84,7 @@ public class LoginLogicTest implements LoginLogic {
     }
 
     //返回指定用户的考试记录
-    UserRPaper[] getUserRPaper(int id){
+    List<UserRPaper> getUserRPaper(int id){
 
         List<UserRPaper> list = new ArrayList<>();
 
@@ -98,11 +94,11 @@ public class LoginLogicTest implements LoginLogic {
             }
         }
 
-        return list.toArray(new UserRPaper[list.size()]);
+        return list;
     }
 
     //返回用户考试记录中对应的试卷集合，长度应与用户的考试记录相同
-     PaperBean[] getPaper(UserRPaper[] userRPapers){
+     List<PaperBean> getPaper(List<UserRPaper> userRPapers){
 
         List<PaperBean> list = new ArrayList<>();
 
@@ -114,6 +110,6 @@ public class LoginLogicTest implements LoginLogic {
             }
         }
 
-        return list.toArray(new PaperBean[list.size()]);
+        return list;
     }
 }
