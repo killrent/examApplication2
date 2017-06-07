@@ -1,7 +1,9 @@
 package com.entity;
 
 import com.entity.relation.UserRPaper;
+import com.utills.JDBCUtils.SQLIgnore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,24 +14,23 @@ public class UserTransferBean {
     private int id;
     private String name;
     private String email;
-    private String signature;
+
+    @SQLIgnore
     private List<UserRPaper> userRPapers;
+
+    @SQLIgnore
     private List<PaperBean> paperBeans;
 
-    public UserTransferBean(int id, String name, String email, String signature, List<UserRPaper> userRPapers, List<PaperBean> paperBeans) {
+    public UserTransferBean() {
+        userRPapers = new ArrayList<>();
+        paperBeans = new ArrayList<>();
+    }
+
+    public UserTransferBean(int id, String name, String email, String signature, List<UserRPaper> userRPapers, List<PaperBean> paperBean) {
+        this();
         this.id = id;
         this.name = name;
         this.email = email;
-        this.signature = signature;
-        this.userRPapers = userRPapers;
-        this.paperBeans = paperBeans;
-    }
-
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
         this.signature = signature;
     }
 
@@ -40,6 +41,24 @@ public class UserTransferBean {
     public void setId(int id) {
         this.id = id;
     }
+
+    public List<UserRPaper> getUserRPapers() {
+        return userRPapers;
+    }
+
+    public void setUserRPapers(List<UserRPaper> userRPapers) {
+        this.userRPapers = userRPapers;
+    }
+
+    public List<PaperBean> getPaperBeans() {
+        return paperBeans;
+    }
+
+    public void setPaperBeans(List<PaperBean> paperBean) {
+        this.paperBeans = paperBean;
+    }
+
+    private String signature;
 
     public String getName() {
         return name;
@@ -57,19 +76,11 @@ public class UserTransferBean {
         this.email = email;
     }
 
-    public List<UserRPaper> getUserRPapers() {
-        return userRPapers;
+    public String getSignature() {
+        return signature;
     }
 
-    public void setUserRPapers(List<UserRPaper> userRPapers) {
-        this.userRPapers = userRPapers;
-    }
-
-    public List<PaperBean> getPaperBeans() {
-        return paperBeans;
-    }
-
-    public void setPaperBeans(List<PaperBean> paperBeans) {
-        this.paperBeans = paperBeans;
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 }
