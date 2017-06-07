@@ -14,3 +14,9 @@ out/
 web/bootstrap/node_modules/
 >>>>>>> Stashed changes
 /src/com/utills/JDBCUtils/RootAccount.java
+web/WEB-INF/classes/com/entity/relation/
+web/WEB-INF/classes/com/model/Interfaces/SearchLogic.class
+web/WEB-INF/classes/com/model/LoginLogicImpl.class
+web/WEB-INF/classes/com/model/SearchLogicImpl.class
+web/WEB-INF/classes/com/utills/gson/datum.json
+web/WEB-INF/lib/mysql-connector-java-5.1.42.jar
