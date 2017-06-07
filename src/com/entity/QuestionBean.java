@@ -6,9 +6,6 @@ import com.utills.JDBCUtils.SQLIgnore;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by 10388 on 2017/6/1.
- */
 public class QuestionBean {
 
     private int id;
@@ -28,7 +25,6 @@ public class QuestionBean {
         items = new ArrayList<>();
         answer = new ArrayList<>();
     }
-
     public int getId() {
         return id;
     }

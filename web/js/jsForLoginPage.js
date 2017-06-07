@@ -14,7 +14,6 @@ $(document).ready(function () {
     var $signUpPassword_confirm = $('.status-span:eq(2)');
     var $signUpPasswordDiv2 = $('#sign-up-password-div-confirm');
 
-
     var $signInSubmit = $('button[type=button]:eq(0)');
     var $signUpSubmit = $('button[type=button]:eq(1)');
 
@@ -198,7 +197,6 @@ $(document).ready(function () {
     }
 
     //设置提交策略
-
     function signStrategy(result) {
 
         var code = result.code;
