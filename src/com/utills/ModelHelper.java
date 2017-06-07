@@ -1,7 +1,9 @@
 package com.utills;
 
 import com.model.Interfaces.LoginLogic;
-import com.test.LoginLogicTest;
+import com.model.Interfaces.SearchLogic;
+import com.model.LoginLogicImpl;
+import com.model.SearchLogicImpl;
 
 /*
  * 单例模式管理接口
@@ -12,8 +14,11 @@ public class ModelHelper {
 
     private LoginLogic loginLogic;
 
+    private SearchLogic searchLogic;
+
     private ModelHelper(){
-        this.loginLogic = new LoginLogicTest();
+        this.loginLogic = new LoginLogicImpl();
+        this.searchLogic = new SearchLogicImpl();
     }
 
     public static ModelHelper getInstance(){
@@ -25,5 +30,9 @@ public class ModelHelper {
 
     public static LoginLogic getLoginLogic(){
         return getInstance().loginLogic;
+    }
+
+    public static SearchLogic getSearchLogic() {
+        return getInstance().searchLogic;
     }
 }

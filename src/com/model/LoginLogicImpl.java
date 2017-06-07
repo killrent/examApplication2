@@ -46,7 +46,7 @@ public class LoginLogicImpl extends GeneralRepository implements LoginLogic {
             ans[0] = ResultSets.fromRow(resultSet, null, UserTransferBean.class);
 
             if (ans[0] != null) {
-                ans[0].setPaperBean(null);
+                ans[0].setPaperBeans(null);
                 ans[0].setUserRPapers(null);
                 return;
             }
@@ -115,7 +115,7 @@ public class LoginLogicImpl extends GeneralRepository implements LoginLogic {
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
 
-            ResultSets.addAllFromResultSet(resultSet, ans[0].getPaperBean(), PaperBean.class);
+            ResultSets.addAllFromResultSet(resultSet, ans[0].getPaperBeans(), PaperBean.class);
             resultSet.close();
             statement.close();
         });

@@ -37,14 +37,14 @@ public class UserTransferBean {
     private List<UserRPaper> userRPapers;
 
     @SQLIgnore
-    private List<PaperBean> paperBean;
+    private List<PaperBean> paperBeans;
 
     public UserTransferBean() {
         userRPapers = new ArrayList<>();
-        paperBean = new ArrayList<>();
+        paperBeans = new ArrayList<>();
     }
 
-    public UserTransferBean(int id, String name, String email, String signature, UserRPaper[] userRPapers, PaperBean[] paperBean) {
+    public UserTransferBean(int id, String name, String email, String signature, List<UserRPaper> userRPapers, List<PaperBean> paperBean) {
         this();
         this.id = id;
         this.name = name;
@@ -78,12 +78,12 @@ public class UserTransferBean {
         this.userRPapers = userRPapers;
     }
 
-    public List<PaperBean> getPaperBean() {
-        return paperBean;
+    public List<PaperBean> getPaperBeans() {
+        return paperBeans;
     }
 
-    public void setPaperBean(List<PaperBean> paperBean) {
-        this.paperBean = paperBean;
+    public void setPaperBeans(List<PaperBean> paperBean) {
+        this.paperBeans = paperBean;
     }
 
     private String signature;

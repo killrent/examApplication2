@@ -6,57 +6,22 @@ import com.entity.relation.UserRPaper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.model.Interfaces.LoginLogic;
+import com.model.Interfaces.SearchLogic;
 import com.model.LoginLogicImpl;
 import com.utills.ModelHelper;
+import com.utills.Please;
 import com.utills.gson.JsonManger;
 
 import java.io.*;
 
 public class ModelTest {
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-//        JsonManger jsonManger = new JsonManger();
-//        Data data = jsonManger.loadDataFormJson();
-//        //System.out.print(data.getUSER()[0].getEmail());
-//
-//        PaperBean[] papers = data.getPAPER();
-//
-//        LoginLogicTest loginLogic = new LoginLogicTest();
-//
-//        String email = "123@qq.com";
-//
-//        UserRPaper userRPaper[] = loginLogic.getUserRPaper(2);
-//
-//        for(UserRPaper x : userRPaper){
-//            System.out.println(x.getId()+":"+ x.getPaperId());
-//        }
+    public static void main(String[] args) throws Exception {
 
-        LoginLogic logic = new LoginLogicImpl();
+        SearchLogic logic = ModelHelper.getSearchLogic();
 
-        Gson gson = new Gson();
+        System.out.println(Please.gson.toJson(logic.getPaperBean("2017", 1)));
 
-        // already has this email.
-        System.out.println(logic.checkEmail("15dqtan@stu.edu.cn"));
-
-        // have no this email yet.
-        System.out.println(logic.checkEmail("you are doooomed!"));
-
-        // ordinary sign up
-        System.out.println(gson.toJson(logic.signUp("assault65535@gmail.com", "123456")));
-
-        // try to sign up a duplicate account
-        System.out.println(gson.toJson(logic.signUp("15dqtan@stu.edu.cn", "1234567")));
-
-        // Access accepted, has former records.
-        System.out.println(gson.toJson(logic.signIn("15dqtan@stu.edu.cn", "123456")));
-
-        // Access accepted, no exam records.
-        System.out.println(gson.toJson(logic.signIn("10086@qq.com", "123456")));
-
-        // Access denied, wrong password.
-        System.out.println(gson.toJson(logic.signIn("10086@qq.com", "1234567")));
-
-        // Access denied, no such email.
-        System.out.println(gson.toJson(logic.signIn("100861@qq.com", "123456")));
+        System.out.println(Please.gson.toJson(logic.getQuestionBeanByPaperId(1, 1)));
     }
 }
