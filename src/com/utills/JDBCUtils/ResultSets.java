@@ -11,6 +11,38 @@ import java.util.Vector;
  */
 public class ResultSets {
 
+    private static Object getObjectFromColumn(ResultSet resultSet, Class tClass, String columnIndex) throws SQLException {
+
+        String className = tClass.getSimpleName();
+
+        switch (className) {
+            case "Boolean":
+            case "boolean":
+                return resultSet.getBoolean(columnIndex);
+            case "Byte":
+            case "byte":
+                return resultSet.getByte(columnIndex);
+            case "Integer":
+            case "int":
+                return resultSet.getInt(columnIndex);
+            case "Float":
+            case "float":
+                return resultSet.getFloat(columnIndex);
+            case "Double":
+            case "double":
+                return resultSet.getDouble(columnIndex);
+            case "Long":
+            case "long":
+                return resultSet.getLong(columnIndex);
+            case "String":
+                return resultSet.getString(columnIndex);
+            case "BigDecimal":
+                return resultSet.getBigDecimal(columnIndex);
+            default:
+                return resultSet.getObject(columnIndex);
+        }
+    }
+
     private static Object getFieldFromColumn(ResultSet resultSet, Field field) throws SQLException {
 
         String fieldName = field.getName();
@@ -20,36 +52,20 @@ public class ResultSets {
             fieldName = col.value();
         }
 
-        String fieldClassName = field.getType().getSimpleName();
-
-        switch (fieldClassName) {
-            case "Boolean":
-            case "boolean":
-                return resultSet.getBoolean(fieldName);
-            case "Byte":
-            case "byte":
-                return resultSet.getByte(fieldName);
-            case "Integer":
-            case "int":
-                return resultSet.getInt(fieldName);
-            case "Float":
-            case "float":
-                return resultSet.getFloat(fieldName);
-            case "Double":
-            case "double":
-                return resultSet.getDouble(fieldName);
-            case "Long":
-            case "long":
-                return resultSet.getLong(fieldName);
-            case "String":
-                return resultSet.getString(fieldName);
-            case "BigDecimal":
-                return resultSet.getBigDecimal(fieldName);
-            default:
-                return resultSet.getObject(fieldName);
-        }
+        return getObjectFromColumn(resultSet, field.getType(), fieldName);
     }
 
+
+    public static int getSize(ResultSet which) throws SQLException {
+
+        int ans = 0;
+
+        while (which.next()) {
+            ans++;
+        }
+
+        return ans;
+    }
 
     public static boolean isEmptySet(ResultSet which) throws SQLException {
         boolean hasNext = which.next();
