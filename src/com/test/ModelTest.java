@@ -6,29 +6,22 @@ import com.entity.relation.UserRPaper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.model.Interfaces.LoginLogic;
+import com.model.Interfaces.SearchLogic;
+import com.model.LoginLogicImpl;
 import com.utills.ModelHelper;
+import com.utills.Please;
 import com.utills.gson.JsonManger;
 
 import java.io.*;
 
 public class ModelTest {
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-        JsonManger jsonManger = new JsonManger();
-        Data data = jsonManger.loadDataFormJson();
-        //System.out.print(data.getUSER()[0].getEmail());
+    public static void main(String[] args) throws Exception {
 
-//        PaperBean[] papers = data.getPAPER();
+        SearchLogic logic = ModelHelper.getSearchLogic();
 
-        LoginLogicTest loginLogic = new LoginLogicTest();
+        System.out.println(Please.gson.toJson(logic.getPaperBean("2017", 1)));
 
-        String email = "123@qq.com";
-
-//        UserRPaper userRPaper[] = loginLogic.getUserRPaper(2);
-//
-//        for(UserRPaper x : userRPaper){
-//            System.out.println(x.getId()+":"+ x.getPaperId());
-//        }
-
+        System.out.println(Please.gson.toJson(logic.getQuestionBeanByPaperId(1, 1)));
     }
 }

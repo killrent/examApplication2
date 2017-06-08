@@ -98,7 +98,7 @@ public class LoginLogicTest implements LoginLogic {
     }
 
     //返回用户考试记录中对应的试卷集合，长度应与用户的考试记录相同
-     List<PaperBean> getPaper(List<UserRPaper> userRPapers){
+    List<PaperBean> getPaper(List<UserRPaper> userRPapers){
 
         List<PaperBean> list = new ArrayList<>();
 
