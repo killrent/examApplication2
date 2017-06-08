@@ -1,25 +1,45 @@
 @charset "utf-8";
 
-div{
-	white-space:normal;
-	/*断开单词换行*/
-	word-wrap:break-word; 
+#search-sider .btn-primary {
+	color: #fff;
+	background-color: #00AA88;
+	border-color: #00AA88;
+}
+#search-sider .btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary {
+	color: #fff;
+	background-color: #00876a;
+	border-color: black;
 }
 
-.label{
-	font-size: 13px;
+#search-sider .panel-info>.panel-heading {
+	color: white;
+	background-color: #00AA88;
+	border-color: #4BBE8D;
+}
+#search-sider .panel-info {
+	border-color: #4BBE8D;
 }
 
-.label:hover{
+.question-title{
+	height: 2em;
+	overflow:hidden;
+	margin-bottom:10px; 
+}
+
+#searchTabsWrapper .label{
+	font-size: 1em;
+}
+
+#searchTabsWrapper .label:hover{
 	opacity: 0.6;
 }
 
-.glyphicon-remove:hover{
+#searchTabsWrapper .glyphicon-remove:hover{
 	color: black;
 	opacity:1;
 }
 
-#searchResultsWarpper .panel-body{
+#search-results-wrapper .tab-pane{
 	overflow-y: scroll;
 	overflow-x: hidden;
 	height: 650px;
@@ -28,3 +48,29 @@ div{
 .glyphicon-plus:hover{
 	opacity: 0.5;
 }
+
+
+#search-results-wrapper .btn-block{
+	background-color: transparent;
+}
+
+#my-tab-content .panel{
+	margin: 10px;
+}
+/*标签页css设置*/
+
+/*标签页边框*/
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    border: 1px solid #4BBE8D;
+    border-bottom:1px solid white;
+}
+/*标签下线*/
+.nav-tabs {
+    border-bottom: 1px solid #4BBE8D;
+}
+
+#search-results-wrapper .tab-pane{
+	border: 1px solid #4BBE8D;
+	border-top-style: none;
+}
+
