@@ -9,6 +9,14 @@ public class UserRPaper {
     private float accuracy;
     private int timeUsed;
 
+    public int getTimeUsed() {
+        return timeUsed;
+    }
+
+    public void setTimeUsed(int timeUsed) {
+        this.timeUsed = timeUsed;
+    }
+
     public int getId() {
         return id;
     }

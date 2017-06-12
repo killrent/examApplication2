@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/cssForSearch.css">
 	<script src="js/search.js"></script>
-	<script type="text/javascript">
+    <script type="text/javascript">
 
         (function ($) {
             $.getUrlParam = function (name) {
@@ -21,7 +21,7 @@
                     return decodeURI(r[2]);
                 return null;
 			}
-		})(jQuery)
+		})(jQuery);
 
 		function haveScroll(){
 			var haveScroll=0;
@@ -39,7 +39,7 @@
                 if((a-c)>200)
                     $("#search-results-wrapper .tab-pane").height(a-c-10);
             }else{
-                var b = $("#search-results-wrapper .tab-pane").height()+Math.abs($(document.body).height()-$(window).height())
+                var b = $("#search-results-wrapper .tab-pane").height()+Math.abs($(document.body).height()-$(window).height());
                 $("#search-results-wrapper .tab-pane").height(b-10);
             }
 		}
@@ -67,7 +67,6 @@
 			getParam();
 			$("#searchByType label:first-child").button("toggle");
 
-			
 			//初始化调整
             changeHeight();
 
@@ -79,7 +78,6 @@
             $('#search-sider-collapse').on('hidden.bs.collapse', function () {
                 changeHeight();
             })
-
 
             //类型绑定
             $("#searchByType label").click(function(){
@@ -118,13 +116,15 @@
 			});
 
 		})
-
-
-	</script>  
+	</script>
 
 
 </head>
 <body>
+	<script type="text/javascript" src="js/header.js"></script>
+
+    <div style="height: 100px;"></div>
+
 	<div class="container">
 		<div class="row">
 			<!-- 侧边搜索栏 -->
@@ -156,14 +156,6 @@
 							</div><!-- form-group -->
 							
 							<div id="searchBySubject" class="form-group">
-								<!-- <label for="searchBySubject">科目</label>
-								<select id="searchBySubject" class="form-control">
-							      <option>未指定</option>
-							      <option>2</option>
-							      <option>3</option>
-							      <option>4</option>
-							      <option>5</option>
-							    </select> --> 
 							    <label>科目类型</label>
 							    <div class="radio">
 								  <label>
@@ -240,5 +232,8 @@
 			</div><!-- col-xs-9 -->
 		</div><!-- row -->
 	</div><!-- container -->
+
+    <script type="text/javascript" src="js/footer.js"></script>
+
 </body>
 </html>

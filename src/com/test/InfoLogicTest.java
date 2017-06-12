@@ -2,14 +2,14 @@ package com.test;
 
 import com.entity.Data;
 import com.entity.UserBean;
-import com.model.Interfaces.InforLogic;
+import com.model.Interfaces.InfoLogic;
 import com.utills.gson.JsonManger;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-public class InforLogicTest implements InforLogic {
+public class InfoLogicTest implements InfoLogic {
     @Override
     public boolean updateInfor(int id, String name, String signature) {
 

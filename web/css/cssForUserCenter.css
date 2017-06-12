@@ -9,3 +9,17 @@ form.form-horizontal input{
     margin-bottom: 1em;
 }
 
+.panel-content{
+    min-height: 220px;
+}
+
+h2 small{
+    text-decoration: underline;
+    color: #23527c;
+}
+
+.unreliable{
+    pointer-events:none;
+    color:#afafaf !important;
+    cursor:default
+}

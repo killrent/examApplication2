@@ -92,7 +92,7 @@ public class control extends HttpServlet {
                 }
                 break;
             case "getAccess":
-                if(session.getAttribute("login") == null){
+                if(session.getAttribute("login") == null || session.getAttribute("login").equals("off")){
                     status.put("email",null);
                 }else if(session.getAttribute("login").equals("on")){
                     status.put("email",session.getAttribute("loginEmail"));

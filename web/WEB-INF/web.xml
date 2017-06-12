@@ -13,12 +13,31 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>signOutServlet</servlet-name>
+        <servlet-class>com.servlet.signOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>signOutServlet</servlet-name>
+        <url-pattern>/signOutServlet.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>userCenterServlet</servlet-name>
         <servlet-class>com.servlet.userCenterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userCenterServlet</servlet-name>
         <url-pattern>/userCenterServlet.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>com.servlet.SearchServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/SearchServlet.do</url-pattern>
     </servlet-mapping>
 
 

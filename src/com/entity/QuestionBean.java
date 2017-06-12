@@ -20,6 +20,16 @@ public class QuestionBean {
 
     @SQLIgnore
     private List<Integer> answer;
+    private int source;
+
+    public int getSource() {
+        return source;
+    }
+
+    public void setSource(int source) {
+        this.source = source;
+    }
+
 
     public QuestionBean() {
         items = new ArrayList<>();

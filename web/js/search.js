@@ -1,7 +1,5 @@
-
-
 var QReceiver ={
-	name:"ques-card-",
+    name:"ques-card-",
     quesId:1,
     quesSet:null,
     target:"",
@@ -15,7 +13,7 @@ var QReceiver ={
         this.quesSet = result;
     },
     insertQuestions:function () {
-	    //在主结果页面或试卷页面插入问题卡片
+        //在主结果页面或试卷页面插入问题卡片
         // 并为每个卡片分配一个id
         var dom="";
         var len = this.quesSet.length;
@@ -142,10 +140,10 @@ var PReceiver ={
                     QReceiver.setTarget("#" + name);
                     QReceiver.insertQuestions();
                 }
-                    // }else if(searchType==="paper"){
-                    //     PReceiver.getPapers(result);
-                    //     PReceiver.insertPapers();
-                    // }
+                // }else if(searchType==="paper"){
+                //     PReceiver.getPapers(result);
+                //     PReceiver.insertPapers();
+                // }
 
             });
 
@@ -163,27 +161,27 @@ var PReceiver ={
 $(function(){
 
     //ajax
-	$("#go-search").click(function(){
-		var searchType;
-		if($("#paper").is(":checked")){
-			searchType = "paper";
+    $("#go-search").click(function(){
+        var searchType;
+        if($("#paper").is(":checked")){
+            searchType = "paper";
         } else{
-		    searchType="question";
-		}
+            searchType="question";
+        }
 
 
-		$.ajax({
-			type:"POST",
-			url:"/SearchServlet.do",
+        $.ajax({
+            type:"POST",
+            url:"/SearchServlet.do",
             timeout:5000,
-			data:{
-					type:searchType,
-					keyword:$("#searchByWord").val(),
-					sort:$("sortWay").val()
-				 },
-			dataType:"json",
-			success:function(result){
-			    if(searchType==="paper") {
+            data:{
+                type:searchType,
+                keyword:$("#searchByWord").val(),
+                sort:$("sortWay").val()
+            },
+            dataType:"json",
+            success:function(result){
+                if(searchType==="paper") {
                     PReceiver.getPapers(result);
                     PReceiver.setTarget("#main-result");
                     PReceiver.insertPapers();
@@ -194,13 +192,13 @@ $(function(){
                 //     PReceiver.insertPapers();
                 // }
                 else{
-                   console.log("没有选择搜索目标类型")
+                    console.log("没有选择搜索目标类型")
                 }
 
             }
 
-		});
-	});
+        });
+    });
 
 
 })

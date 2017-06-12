@@ -12,9 +12,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Tnecesoc on 2017/6/6.
- */
 public class SearchLogicImpl extends GeneralRepository implements SearchLogic {
 
     @Override

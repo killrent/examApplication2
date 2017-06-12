@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DashBoard</title>
+    <title>个人中心</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/911bb220f7.css">
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/footer.css"/>
     <link rel="stylesheet" href="css/profile-page.css">
     <link rel="stylesheet" href="css/exam-overview.css"/>
+    <link rel="stylesheet" href="css/cssForUserCenter.css"/>
 
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -19,39 +20,7 @@
 
 </head>
 <body>
-    <!-- header -->
-    <header style="position:absolute; width: 100%">
-        <nav class="navbar navbar-inverse" style="margin-bottom: 0" >
-            <div class="container-fluid" >
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">Enimaxe</a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="header-contents">
-                    <form class="navbar-form navbar-left">
-                        <div class="form-group">
-                            <input id="search-keyword" type="text" class="form-control" placeholder="搜索试题、考试及用户">
-                        </div>
-                    </form>
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">考试</a></li>
-                        <li><a href="#">题库</a></li>
-                        <li><a href="#">留言板</a> </li>
-                    </ul>
-                    <ul class="ul-state nav navbar-nav nav-pills navbar-right" >
-                        <li><a href="#" style="padding-top: 4px; padding-bottom: 0; padding-left: 0">
-                            <img class="img-circle" src="image/fu.jpg"/></a>
-                        </li>
-                        <li><a id="user-href" href="user-center.html">昵称</a></li>
-                        <li><a href="" style="text-decoration: underline">注销</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-    </header>
-
+    <script type="text/javascript" src="js/header.js"></script>
     <!-- profile -->
     <div id="profile">
 
@@ -59,28 +28,28 @@
 
         <div style="position:absolute; bottom: 0; right: 12%;">
             <div id="profile-numbers" style="display: flex;">
-                <div>
+                <div class="status-bar">
                     <p>13</p>
                     <p>参加考试</p>
                 </div>
-                <div>
+                <div class="status-bar">
                     <p>23</p>
                     <p>作答题数</p>
                 </div>
-                <div>
-                    <p>8</p>
-                    <p>发起考试</p>
-                </div>
-                <div>
-                    <p>23</p>
-                    <p>设计试题</p>
-                </div>
+                <!--<div>-->
+                    <!--<p>8</p>-->
+                    <!--<p>发起考试</p>-->
+                <!--</div>-->
+                <!--<div>-->
+                    <!--<p>23</p>-->
+                    <!--<p>设计试题</p>-->
+                <!--</div>-->
             </div>
 
         </div>
 
         <table><tbody><tr><td style="height: 240px;">
-            <h2>昵称 <small>@用户名</small></h2>
+            <h2>昵称 <small style="text-decoration:underline;color: #1b6d85">邮箱</small></h2>
             <p>这家伙很懒，什么都没有留下。</p>
         </td></tr></tbody></table>
     </div>
@@ -91,149 +60,207 @@
             <div class="col-md-2">
                 <div class="panel panel-default">
                     <ul class="nav nav-stacks">
-                        <li class="active"><a href="#">概览 <i class="fa fa-fw fa-chevron-right"></i></a></li>
-                        <li><a href="#">个人信息 <i class="fa fa-fw fa-chevron-right"></i></a></li>
-                        <li><a href="#">考试历史 <i class="fa fa-fw fa-chevron-right"></i></a></li>
-                        <li><a href="#">收藏夹 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                        <li class="active" ><a href="#overview" role="tab" data-toggle="tab">概览<i class="fa fa-fw fa-chevron-right"></i></a></li>
+                        <li><a href="#person-infor" role="tab" data-toggle="tab">个人信息 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                        <li><a href="#record-infor" role="tab" data-toggle="tab">考试历史 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                        <li><a href="#favorite-infor" role="tab" data-toggle="tab">收藏夹 <i class="fa fa-fw fa-chevron-right"></i></a></li>
                     </ul>
 
                     <hr style="margin: 1em 2em"/>
 
-                    <ul class="nav nav-stacks">
-                        <li><a href="#">发起考试 <i class="fa fa-fw fa-chevron-right"></i></a></li>
-                        <li><a href="#">设计试卷 <i class="fa fa-fw fa-chevron-right"></i></a></li>
-                        <li><a href="#">试卷库 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                    <ul class="nav nav-stacks ">
+                        <li ><a href="# " class="unreliable">发起考试 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                        <li ><a href="#" class="unreliable">设计试卷 <i class="fa fa-fw fa-chevron-right"></i></a></li>
+                        <li ><a href="#" class="unreliable">试卷库 <i class="fa fa-fw fa-chevron-right"></i></a></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-8 tab-content" >
+                <div class="tab-pane active" id="overview">
+                    <div id="experienced-test" class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>参与考试 <small>这里显示考试的得分、总分和点击量</small></h3>
+                            <a href="#">设置显示内容</a>
+                        </div>
 
-                <div id="experienced-test" class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3>参与考试 <small>这里显示考试的得分、总分和排名</small></h3>
-                        <a href="#">设置显示内容</a>
+                        <div class="panel-content exam-list-container ">
+                            <ul>
+                                <li class="exam-item" style="display: none" >
+                                    <div class="exam" >
+                                        <a class="exam-name" href="#" title="2016普通高等学校招生全国统一考试（全国卷I）英语">
+                                            2016普通高等学校招生全国统一考试（全国卷I）英语
+                                        </a>
+                                        <!--<p class="exam-score">#469, 112 / 150</p>-->
+                                        <div class="exam-desc">
+                                            <ul>
+                                                <li title="点击量"><i class="fa fa-hashtag"></i></li>
+                                                <li title="正确率"><i class="fa fa-star-o"></i></li>
+                                            </ul>
+                                        </div>
+                                        <p class="exam-time">提交于 刚刚</p>
+                                    </div>
+                                </li>
+                                <li class="exam-item" style="display: none" >
+                                    <div class="exam" >
+                                        <a class="exam-name" href="#" title="现在这个考试标题很短">
+                                            现在这个考试标题很短
+                                        </a>
+                                        <!--<p class="exam-score">#87, 76 / 100</p>-->
+                                        <div class="exam-desc">
+                                            <ul>
+                                                <li title="点击量"><i class="fa fa-hashtag"></i> </li>
+                                                <li title="正确率"><i class="fa fa-star-o"></i> </li>
+                                            </ul>
+                                        </div>
+                                        <p class="exam-time">提交于 30 分钟前</p>
+                                    </div>
+                                </li>
+                                <li class="exam-item" style="display: none" >
+                                    <div class="exam" >
+                                        <a class="exam-name" href="#" title="现在这个考试标题很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长">
+                                            现在这个考试标题很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长
+                                        </a>
+                                        <!--<p class="exam-score">#1, 59 / 60</p>-->
+                                        <div class="exam-desc">
+                                            <ul>
+                                                <li title="点击量"><i class="fa fa-hashtag"></i> </li>
+                                                <li title="正确率"><i class="fa fa-star-o"></i> </li>
+                                            </ul>
+                                        </div>
+                                        <p class="exam-time">提交于 1 小时前</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="panel-content exam-list-container">
-                        <ul>
-                            <li>
-                                <div>
-                                    <a class="exam-name" href="#" title="2016普通高等学校招生全国统一考试（全国卷I）英语">
-                                        2016普通高等学校招生全国统一考试（全国卷I）英语
-                                    </a>
-                                    <!--<p class="exam-score">#469, 112 / 150</p>-->
-                                    <div class="exam-desc">
-                                        <ul>
-                                            <li title="排名"><i class="fa fa-hashtag"></i> 469</li>
-                                            <li title="得分与总分"><i class="fa fa-star-o"></i> 112 / 150</li>
-                                        </ul>
+                    <div id="favourite" class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>收藏夹 <small>这里显示考试的题量，考试时间和标签</small></h3>
+                            <a href="#">设置显示内容</a>
+                        </div>
+                        <div class="panel-content exam-list-container">
+
+                        </div>
+                    </div>
+
+                    <div id="arranged-test" class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>设计考试 <small>这里显示考试的题量，考试时间和作答人次</small></h3>
+                            <a href="#">设置显示内容</a>
+                        </div>
+
+                        <div class="panel-content exam-list-container">
+                            <ul>
+                                <li>
+                                    <div>
+                                        <a class="exam-name" href="#" title="2016普通高等学校招生全国统一考试（全国卷I）英语">
+                                            2016普通高等学校招生全国统一考试（全国卷I）英语
+                                        </a>
+                                        <!--<p class="exam-score">题量 11 道<br/> 作答 150 人次<br/> 平均分 78.5 / 100</p>-->
+                                        <div class="exam-desc">
+                                            <ul>
+                                                <li title="做答人次"><i class="fa fa-pencil-square-o"></i> 10.6k</li>
+                                                <li title="题量和考试时间"><i class="fa fa-file-text-o"></i> 11 / 120 分钟</li>
+                                            </ul>
+                                        </div>
+                                        <p class="exam-time">发布于 刚刚</p>
                                     </div>
-                                    <p class="exam-time">提交于 刚刚</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <a class="exam-name" href="#" title="现在这个考试标题很短">
-                                        现在这个考试标题很短
-                                    </a>
-                                    <!--<p class="exam-score">#87, 76 / 100</p>-->
-                                    <div class="exam-desc">
-                                        <ul>
-                                            <li title="排名"><i class="fa fa-hashtag"></i> 87</li>
-                                            <li title="得分与总分"><i class="fa fa-star-o"></i> 76 / 100</li>
-                                        </ul>
+                                </li>
+                                <li>
+                                    <div>
+                                        <a class="exam-name" href="#" title="现在这个考试标题很短">
+                                            现在这个考试标题很短
+                                        </a>
+                                        <!--<p class="exam-score">87 / 100 / #87</p>-->
+                                        <div class="exam-desc">
+                                            <ul>
+                                                <li title="做答人次"><i class="fa fa-pencil-square-o"></i> 10.6k</li>
+                                                <li title="题量和考试时间"><i class="fa fa-file-text-o"></i> 11 道题</li>
+                                            </ul>
+                                        </div>
+                                        <p class="exam-time">发布于 30 分钟前</p>
                                     </div>
-                                    <p class="exam-time">提交于 30 分钟前</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <a class="exam-name" href="#" title="现在这个考试标题很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长">
-                                        现在这个考试标题很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长
-                                    </a>
-                                    <!--<p class="exam-score">#1, 59 / 60</p>-->
-                                    <div class="exam-desc">
-                                        <ul>
-                                            <li title="排名"><i class="fa fa-hashtag"></i> 1</li>
-                                            <li title="得分与总分"><i class="fa fa-star-o"></i> 59 / 60</li>
-                                        </ul>
+                                </li>
+                                <li>
+                                    <div>
+                                        <a class="exam-name" href="#" title="现在这个考试标题很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长">
+                                            现在这个考试标题很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长
+                                        </a>
+                                        <div class="exam-desc">
+                                            <ul>
+                                                <li title="做答人次"><i class="fa fa-pencil-square-o"></i> 10.6k</li>
+                                                <li title="题量和考试时间"><i class="fa fa-file-text-o"></i> 11 / 120 分钟</li>
+                                            </ul>
+                                        </div>
+                                        <p class="exam-time">发布于 1 小时前</p>
                                     </div>
-                                    <p class="exam-time">提交于 1 小时前</p>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-                <div id="arranged-test" class="panel panel-default">
+                <div class="tab-pane panel panel-default" id="person-infor">
                     <div class="panel-heading">
-                        <h3>设计考试 <small>这里显示考试的题量，考试时间和作答人次</small></h3>
+                        <h3>个人信息 <small>这里显示与修改个人信息</small></h3>
                         <a href="#">设置显示内容</a>
                     </div>
-
                     <div class="panel-content exam-list-container">
-                        <ul>
-                            <li>
-                                <div>
-                                    <a class="exam-name" href="#" title="2016普通高等学校招生全国统一考试（全国卷I）英语">
-                                        2016普通高等学校招生全国统一考试（全国卷I）英语
-                                    </a>
-                                    <!--<p class="exam-score">题量 11 道<br/> 作答 150 人次<br/> 平均分 78.5 / 100</p>-->
-                                    <div class="exam-desc">
-                                        <ul>
-                                            <li title="做答人次"><i class="fa fa-pencil-square-o"></i> 10.6k</li>
-                                            <li title="题量和考试时间"><i class="fa fa-file-text-o"></i> 11 / 120 分钟</li>
-                                        </ul>
-                                    </div>
-                                    <p class="exam-time">发布于 刚刚</p>
+                        <form class="form-horizontal" action="/userCenterServlet.do" method="POST">
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">邮箱</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="inputEmail"  value="邮箱" disabled="disabled">
                                 </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <a class="exam-name" href="#" title="现在这个考试标题很短">
-                                        现在这个考试标题很短
-                                    </a>
-                                    <!--<p class="exam-score">87 / 100 / #87</p>-->
-                                    <div class="exam-desc">
-                                        <ul>
-                                            <li title="做答人次"><i class="fa fa-pencil-square-o"></i> 10.6k</li>
-                                            <li title="题量和考试时间"><i class="fa fa-file-text-o"></i> 11 道题</li>
-                                        </ul>
-                                    </div>
-                                    <p class="exam-time">发布于 30 分钟前</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">昵称</label>
+                                <div class="col-sm-9">
+                                    <input name="newName" type="text" class="form-control" id="inputName" >
                                 </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <a class="exam-name" href="#" title="现在这个考试标题很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长">
-                                        现在这个考试标题很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长
-                                    </a>
-                                    <div class="exam-desc">
-                                        <ul>
-                                            <li title="做答人次"><i class="fa fa-pencil-square-o"></i> 10.6k</li>
-                                            <li title="题量和考试时间"><i class="fa fa-file-text-o"></i> 11 / 120 分钟</li>
-                                        </ul>
-                                    </div>
-                                    <p class="exam-time">发布于 1 小时前</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputSignature" class="col-sm-2 control-label">签名</label>
+                                <div class="col-sm-9">
+                                    <textarea name="newSignature" class="form-control" id="inputSignature" >12312312</textarea>
                                 </div>
-                            </li>
-                        </ul>
+                            </div>
+                             <div class="form-group">
+                                 <div class="col-sm-8"></div>
+                                 <div class="col-sm-3">
+                                     <button type="submit" class="btn btn-default">更改</button>
+                                     <button type="reset" class="btn btn-default">重置</button>
+                                 </div>
+                             </div>
+                        </form>
                     </div>
 
                 </div>
 
-                <div id="favourite" class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3>收藏夹 <small>这里显示考试的题量，考试时间和标签</small></h3>
-                        <a href="#">设置显示内容</a>
-                    </div>
+                <!--详细考试记录-->
+                <div class="tab-pane" id="record-infor">
+                    <table class="table table-striped table-hover">
+                            <tr>
+                                <th>序号</th><th>试卷名</th><th>考试时间</th><th>考试时长</th><th>准确度</th><th>参考者数</th>
+                            </tr>
 
-                    <div class="panel-content exam-list-container">
+                    </table>
 
+                </div>
+                <div class="tab-pane" id="favorite-infor">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>收藏夹 <small>这里显示考试的题量，考试时间和标签</small></h3>
+                            <a href="#">设置显示内容</a>
+                        </div>
+                        <div class="panel-content exam-list-container">
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -256,19 +283,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        $(document).ready(function () {
-
-//            $('#experienced-test').find('.panel-content').append('<span class="不存在的">不存在的</span>');
-
-//            $('#arranged-test').find('.panel-content').append('<span class="不存在的">不存在的</span>');
-
-            $('#favourite').find('.panel-content').append('<span class="不存在的">不存在的</span>');
-
-        });
-    </script>
-
-
 </body>
 </html>

@@ -1,6 +1,10 @@
 
-$(document).ready(function () {
+var $signInSubmit;
+var $signUpSubmit;
 
+var flag = true;
+
+$(document).ready(function () {
     var $reminder = $('.help-block:eq(0)');
     var $reminder1 = $('.help-block:eq(1)');
     var $reminder2 = $('.help-block:eq(2)');
@@ -14,15 +18,22 @@ $(document).ready(function () {
     var $signUpPassword_confirm = $('.status-span:eq(2)');
     var $signUpPasswordDiv2 = $('#sign-up-password-div-confirm');
 
-    var $signInSubmit = $('button[type=button]:eq(0)');
-    var $signUpSubmit = $('button[type=button]:eq(1)');
+    var $signInEmailDiv = $('#sign-in-email-div');
+    var $signInPasswordDiv = $('#sign-in-password-div');
 
-    var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+    $signInSubmit = $('button[type=button]:eq(0)');
+    $signUpSubmit = $('button[type=button]:eq(1)');
 
-    var signUpEmailValue ;
-    var signUpPasswordValue;
     var signInEmailValue;
     var signInPasswordValue;
+    var signUpEmailValue;
+    var signUpPasswordValue;
+    var signUpPasswordConfirmValue;
+
+    $('#example').popover('show');
+
+
+    const myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
 
     //初始化
     $reminder.hide();
@@ -30,8 +41,30 @@ $(document).ready(function () {
     $reminder2.hide();
     $reminder3.hide();
     $reminder4.hide();
-    $signInSubmit.attr('disabled',true);
-    $signUpSubmit.attr('disabled',true);
+
+    var g1 = $('#sign-in-panel').find('.input-group');
+    var g2 = $('#sign-up-panel').find('.input-group');
+
+    //标签页事件
+    $('a[data-toggle=tab]').on('shown.bs.tab',function (e) {
+        var t = $(e.target);
+        var ot = $(e.relatedTarget);
+
+        ot.addClass('text-center');
+        if(t.attr('id') === 'a1'){
+            flag = true;
+            t.html('登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录');
+            ot.html('注册');
+            g2.popover('hide');
+        }else {
+            flag = false;
+            ot.html('登录');
+            t.html('注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册');
+            g1.popover('hide');
+            g1.popover('hide');
+
+        }
+    });
 
     //查看密码文本
     $('.mySpan').hover(
@@ -50,13 +83,12 @@ $(document).ready(function () {
         signInEmailValue = $(this).val();
         if(myreg.test(signInEmailValue)){
             $reminder.addClass('ok');
-            $reminder.hide();
+            $signInEmailDiv.popover('hide');
         }else {
             $reminder.removeClass('ok');
-            $reminder.html('请输入正确的邮箱地址。');
-            $reminder.fadeTo('slow',1);
+            $signInEmailDiv.attr('data-content','请输入正确的邮箱地址。');
+            $signInEmailDiv.popover('show');
         }
-        signInReliable();
     });
 
     //对登录密码进行本地校验
@@ -71,31 +103,30 @@ $(document).ready(function () {
        }
        if(passwordCheck(signInPasswordValue)){
            $reminder1.addClass('ok');
-           $reminder1.hide();
+           $signInPasswordDiv.popover('hide');
        }else {
            $reminder1.removeClass('ok');
-           $reminder1.html('请输入6到12位字符作为密码。');
-           $reminder1.fadeTo('slow',1);
+           $signInPasswordDiv.attr('data-content','请输入6到12位字符作为密码。');
+           $signInPasswordDiv.popover('show');
        }
-       signInReliable();
     });
 
     //对注册邮箱地址进行本地校验+服务器校验
     function signUpStrategy(result) {
         console.log(result);
         if(result.success){
-            $reminder2.hide();
             $signUpEmail.removeClass('glyphicon-remove');
             $signUpEmail.addClass('glyphicon-ok');
             $signUpEmailDiv.removeClass('has-error');
             $signUpEmailDiv.addClass('has-success');
+            $signUpEmailDiv.popover('hide');
         }else{
             $signUpEmail.removeClass('glyphicon-ok');
             $signUpEmail.addClass('glyphicon-remove');
             $signUpEmailDiv.removeClass('has-success');
             $signUpEmailDiv.addClass('has-error');
-            $reminder2.html('该邮箱已被占用。');
-            $reminder2.fadeTo('slow',1);
+            $signUpEmailDiv.attr('data-content','该邮箱地址已被占用。');
+            $signUpEmailDiv.popover('show');
         }
     }
 
@@ -106,17 +137,16 @@ $(document).ready(function () {
             $signUpEmail.addClass('glyphicon-ok');
             $signUpEmailDiv.removeClass('has-error');
             $signUpEmailDiv.addClass('has-success');
-            $reminder2.hide();
             useAjax(signUpStrategy);
+            $signUpEmailDiv.popover('hide');
         }else{
             $signUpEmail.removeClass('glyphicon-ok');
             $signUpEmail.addClass('glyphicon-remove');
             $signUpEmailDiv.removeClass('has-success');
             $signUpEmailDiv.addClass('has-error');
-            $reminder2.html('请输入正确的邮箱地址。');
-            $reminder2.fadeTo('slow',1);
+            $signUpEmailDiv.popover('show');
+            $signUpEmailDiv.attr('data-content','请输入正确的邮箱地址。');
         }
-        signUpReliable();
     });
     //对注册密码进行本地校验
     $('#sign-up-password').change(function () {
@@ -126,22 +156,23 @@ $(document).ready(function () {
             $signUpPassword.addClass('glyphicon-ok');
             $signUpPasswordDiv.removeClass('has-error');
             $signUpPasswordDiv.addClass('has-success');
-            $reminder3.hide();
             confirm($(this).val(),$('#sign-up-password-confirm').val());
+            $signUpPasswordDiv.popover('hide');
         }else {
             $signUpPassword.addClass('glyphicon-remove');
             $signUpPassword.removeClass('glyphicon-ok');
             $signUpPasswordDiv.addClass('has-error');
             $signUpPasswordDiv.removeClass('has-success');
-            $reminder3.html('密码长度不能少于6位');
-            $reminder3.fadeTo('slow',1);
+            $signUpPasswordDiv.attr('data-content','密码长度不能少于6位或多于12位');
+            $signUpPasswordDiv.popover('show');
             confirm($(this).val(),$('#sign-up-password-confirm').val());
         }
     });
 
     //对重复密码进行本地校验
     $('#sign-up-password-confirm').change(function () {
-        confirm($(this).val(),$('#sign-up-password').val());
+        signUpPasswordConfirmValue = $(this).val();
+        confirm(signUpPasswordConfirmValue,$('#sign-up-password').val());
     });
 
     function confirm (password1, password2) {
@@ -150,16 +181,16 @@ $(document).ready(function () {
             $signUpPassword_confirm.addClass('glyphicon-ok');
             $signUpPasswordDiv2.removeClass('has-error');
             $signUpPasswordDiv2.addClass('has-success');
-            $reminder4.hide();
+
+            $signUpPasswordDiv2.popover('hide');
         }else {
             $signUpPassword_confirm.addClass('glyphicon-remove');
             $signUpPassword_confirm.removeClass('glyphicon-ok');
             $signUpPasswordDiv2.addClass('has-error');
             $signUpPasswordDiv2.removeClass('has-success');
-            $reminder4.html('两次密码输入不一致');
-            $reminder4.fadeTo('slow',1);
+            $signUpPasswordDiv2.attr('data-content','两次密码输入不一致');
+            $signUpPasswordDiv2.popover('show');
         }
-        signUpReliable();
     }
 
     function useAjax(strategy){
@@ -177,78 +208,147 @@ $(document).ready(function () {
         });
     }
 
-    //设置注册页面的按钮激活状态
-    function signUpReliable() {
-        if($signUpPassword.hasClass('glyphicon-ok') && $signUpPassword_confirm.hasClass('glyphicon-ok') && $signUpEmail.hasClass('glyphicon-ok')){
-            $signUpSubmit.attr('disabled',false);
-        }else {
-            $signUpSubmit.attr('disabled',true);
-        }
-    }
+    var $signInLoader = $('.loader:eq(0)');
+    var $signUpLoader = $('.loader:eq(1)');
 
-    //设置登录页面的按钮激活状态
-    function signInReliable() {
-
-        if($reminder.hasClass('ok')&& $reminder1.hasClass('ok')){
-            $signInSubmit.attr('disabled',false);
-        }else {
-            $signInSubmit.attr('disabled',true);
-        }
-    }
+    var $modal = $('.modal');
+    var $modelBody = $('.modal-body');
+    var $moddelTitle = $('.modal-title');
+    var $loader = $('.loader-inner');
 
     //设置提交策略
     function signStrategy(result) {
 
         var code = result.code;
 
+        $modal.modal('show');
         switch (code) {
             case 1000:
-                alert('登录成功！页面跳转至个人中心...');
+                $moddelTitle.html('登录成功！');
+                $loader.html("转至个人中心...");
                 self.location = 'user-center.html';
                 break;
             case 1001:
-                alert('登录失败！');
+                $moddelTitle.html('登录失败！');
+                $loader.html('用户名或密码错误。');
+                $signInSubmit.css('display','block');
+                $signInLoader.css('display','none');
                 break;
             case 1010:
-                alert('注册成功！页面跳转至个人中心...');
+                $moddelTitle.html('注册成功！');
+                $loader.html('转至个人中心...');
                 self.location = 'user-center.html';
                 break;
             case 1011:
-                alert('注册失败！');
+                $moddelTitle.html('注册失败！');
+                $loader.html('请刷新页面后重试。');
+                $signUpSubmit.css('display','block');
+                $signUpLoader.css('display','none');
                 break;
             default:
                 alert('success!' + result + "  code=" + code );
         }
+
+
+
+
     }
 
-    $signInSubmit.click(function () {
-        $.ajax({
-            url:"controlServlet.do",
-            data:{type:'signIn',signInEmail:signInEmailValue, signInPassword:signInPasswordValue}, //传输键值对
-            aysnc:true,
-            cache:false,
-            type:'POST',
-            dataType:'json',
-            success:signStrategy,
-            error:function () {
-                alert('服务器无响应，错误信息为'+ arguments[1]);
-            }
-        });
-    });
+    $signInSubmit.click(signInClickCheck);
+    $signUpSubmit.click(signUpClickCheck);
 
-    $signUpSubmit.click(function () {
-        $.ajax({
-            url:"controlServlet.do",
-            data:{type:'signUp',signUpEmail:signUpEmailValue, signUpPassword:signUpPasswordValue}, //传输键值对
-            aysnc:true,
-            cache:false,
-            type:'POST',
-            dataType:'json',
-            success:signStrategy,
-            error:function () {
-                alert('服务器无响应，错误信息为'+ arguments[1]);
-            }
-        });
-    });
 
+    function signInClickCheck() {
+
+        if(signInEmailValue === undefined){
+            $reminder.removeClass('ok');
+            $signInEmailDiv.attr('data-content','邮箱地址不能为空。');
+            $signInEmailDiv.popover('show');
+        }
+
+        if(signInPasswordValue === undefined){
+            $reminder1.removeClass('ok');
+            $signInPasswordDiv.attr('data-content','密码不能为空。');
+            $signInPasswordDiv.popover('show');
+        }
+
+        if($reminder.hasClass('ok')&& $reminder1.hasClass('ok')) {
+
+            $signInSubmit.css('display','none');
+            $signInLoader.css('display','block');
+
+            //
+            // $modal.on('shown.bs.modal',function () {
+                $.ajax({
+                    url:"controlServlet.do",
+                    data:{type:'signIn',signInEmail:signInEmailValue, signInPassword:signInPasswordValue}, //传输键值对
+                    aysnc:true,
+                    cache:false,
+                    type:'POST',
+                    dataType:'json',
+                    success:signStrategy,
+                    error:function () {
+                        alert('服务器无响应，错误信息为'+ arguments[1]);
+                    }
+                });
+            //
+            // });
+        }
+    }
+    //
+    function signUpClickCheck() {
+        if(signUpEmailValue === undefined){
+            $reminder2.removeClass('ok');
+
+            $signUpEmailDiv.popover('show');
+            $signUpEmailDiv.attr('data-content','邮箱地址不能为空！');
+        }
+
+        if(signUpPasswordValue === undefined){
+            $reminder3.removeClass('ok');
+
+            $signUpPasswordDiv.popover('show');
+            $signUpPasswordDiv.attr('data-content','密码不能为空！');
+        }
+
+        if(signUpPasswordConfirmValue === undefined){
+            $reminder4.removeClass('ok');
+
+            $signUpPasswordDiv2.popover('show');
+            $signUpPasswordDiv2.attr('data-content','请再一次确认密码。');
+        }
+
+        if($signUpPassword.hasClass('glyphicon-ok') && $signUpPassword_confirm.hasClass('glyphicon-ok') && $signUpEmail.hasClass('glyphicon-ok')){
+
+            $signUpSubmit.css('display','none');
+            $signUpLoader.css('display','block');
+
+            $.ajax({
+                url:"controlServlet.do",
+                data:{type:'signUp',signUpEmail:signUpEmailValue, signUpPassword:signUpPasswordValue}, //传输键值对
+                aysnc:true,
+                cache:false,
+                type:'POST',
+                dataType:'json',
+                success:signStrategy,
+                error:function () {
+                    alert('服务器无响应，错误信息为'+ arguments[1]);
+                }
+            });
+        }
+
+    }
+
+});
+
+
+$(document).keyup(function(event){
+
+    if(event.which ===13){
+        if(flag){
+            $signInSubmit.trigger('click');
+        }else{
+            $signUpSubmit.trigger('click');
+        }
+    }
 });

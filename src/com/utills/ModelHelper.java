@@ -1,8 +1,8 @@
 package com.utills;
 
-import com.model.Interfaces.InforLogic;
+import com.model.Interfaces.InfoLogic;
 import com.model.Interfaces.LoginLogic;
-import com.test.InforLogicTest;
+import com.test.InfoLogicTest;
 import com.test.LoginLogicTest;
 
 /*
@@ -13,11 +13,11 @@ public class ModelHelper {
     private static ModelHelper instance;
 
     private LoginLogic loginLogic;
-    private InforLogic inforLogic;
+    private InfoLogic infoLogic;
 
     private ModelHelper(){
         this.loginLogic = new LoginLogicTest();
-        this.inforLogic = new InforLogicTest();
+        this.infoLogic = new InfoLogicTest();
     }
 
     public static ModelHelper getInstance(){
@@ -31,5 +31,5 @@ public class ModelHelper {
         return getInstance().loginLogic;
     }
 
-    public static InforLogic getInforgicTest(){ return getInstance().inforLogic; }
+    public static InfoLogic getInforgicTest(){ return getInstance().infoLogic; }
 }

@@ -54,11 +54,11 @@ public class LoginLogicTest implements LoginLogic {
     @Override
     public UserTransferBean signUp(String email, String password) {
 
+        if(email == null || password == null) return null;
+
         user.add(new UserBean(user.size(),"新人驾到",email,password,"新兵上任三桶水！"));
 
-
-        UserTransferBean userTransferBean = new UserTransferBean(user.size(),"新人驾到",email,"新兵上台三桶水！",null,null);
-
+        UserTransferBean userTransferBean = new UserTransferBean(user.size() + 1,"新人驾到",email,"新兵上台三桶水！",null,null);
 
         try {
             jsonManger.saveDataIntoJson(data);
