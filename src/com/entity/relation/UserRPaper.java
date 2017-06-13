@@ -8,6 +8,17 @@ public class UserRPaper {
     private String time;
     private float accuracy;
     private int timeUsed;
+<<<<<<< HEAD
+=======
+
+    public int getTimeUsed() {
+        return timeUsed;
+    }
+
+    public void setTimeUsed(int timeUsed) {
+        this.timeUsed = timeUsed;
+    }
+>>>>>>> refs/remotes/EmiyaYang/master
 
     public int getId() {
         return id;

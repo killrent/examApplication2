@@ -22,6 +22,7 @@ public class JsonManger {
 
         out.write(sets);
         out.close();
+
     }
 
     public Data loadDataFormJson() throws UnsupportedEncodingException {

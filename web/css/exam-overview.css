@@ -8,14 +8,14 @@
     margin: 0;
     padding: 16px;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .exam-list-container > ul > li {
     padding: 1%;
     display: flex;
     width: 32%;
-    margin-bottom: 8px;
+    margin: auto 0.29em;
     border: solid 1px #aaa;
     border-radius: 4px;
     text-align: left;
@@ -33,16 +33,22 @@
     margin: 4px 0;
 }
 
+
 .exam-name {
     -moz-box-flex: 1;
     -webkit-box-flex: 1;
     font-weight: bold;
     flex: 1 0 auto;
     line-height: 1.75em;
+    font-size: 1.2em;
+}
+
+.exam{
+    height: 150px;
 }
 
 .exam-desc {
-    margin: 1em 0;
+    margin: 0.5em 0;
     border: none;
     color: #666;
 }

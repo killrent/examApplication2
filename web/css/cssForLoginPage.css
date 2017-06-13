@@ -2,6 +2,34 @@ body{
 	background-color: #00cc99;
 }
 
+/*.myBtn{*/
+    /*background-color: #FF9E00;*/
+    /*border-color: #FF9E00;*/
+/*}*/
+/*.myBtn:hover{*/
+    /*background-color: #FFC900!important;*/
+    /*border-color: #FFC900!important;*/
+/*}*/
+/*.myBtn:active{*/
+    /*background-color: #FF5F00!important;*/
+    /*border-color: #FF5F00!important;*/
+/*}*/
+
+/*.myBtn:focus{*/
+    /*background-color: #FF9E00;*/
+    /*border-color: #FF9E00;*/
+/*}*/
+
+
+.panel-footer{
+    height: 50px;
+    padding: 0;
+}
+
+#password-forget{
+    margin-right: 2em;
+}
+
 #logoDiv img{
     max-width: 650px;
     margin-bottom: 1.5em;
@@ -11,19 +39,20 @@ body{
 	max-width: 400px;
 	min-width: 300px;
 	background-color: white;
-	border-radius: 5px;
+	padding-left: 0;
+	padding-right: 0;
+    border-radius: 0;
 }
 
-.myform{
-	padding: 1em;
-}
-
-.input-group,button[type='button']{
-	margin-top: 1em;
-}
 
 div button[type='button']{
     width: 100%;
+    height: 100%;
+    border-radius: 0;
+    -moz-border-radius-bottomleft: 8px;
+    -moz-border-radius-bottomright: 8px;
+    -webkit-border-bottom-left-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
 }
 
 .mySpan:hover{
@@ -33,7 +62,7 @@ div button[type='button']{
 }
 
 ul > li{
-	margin: 0 -1px -1px -1px !important;
+	margin: 0 0 -1px 0;
 }
 
 .help-block{
@@ -43,3 +72,34 @@ ul > li{
 #sign-in-form {
     margin-bottom: 0 !important;
 }
+
+.input-group.row{
+    margin: 1.5em 1em 0.5em 1em;
+}
+
+.row.reminder{
+    margin-left: 1em;
+}
+
+.panel-footer{
+    -moz-border-radius-bottomleft: 8px;
+    -moz-border-radius-bottomright: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+    -webkit-border-bottom-left-radius: 8px;
+    margin-top: 2em;
+    background-color: #337ab7;
+}
+
+.list-item.active a{
+    /*color: white !important;*/
+}
+
+.list-item{
+    width: 30%;
+    font-size: 20px !important;
+}
+
+.list-item.active{
+    width: 70% !important;
+}
+

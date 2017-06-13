@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 
 
 var QReceiver ={
 	name:"ques-card-",
+=======
+var QReceiver ={
+    name:"ques-card-",
+>>>>>>> refs/remotes/EmiyaYang/master
     quesId:1,
     quesSet:null,
     target:"",
@@ -15,7 +20,11 @@ var QReceiver ={
         this.quesSet = result;
     },
     insertQuestions:function () {
+<<<<<<< HEAD
 	    //在主结果页面或试卷页面插入问题卡片
+=======
+        //在主结果页面或试卷页面插入问题卡片
+>>>>>>> refs/remotes/EmiyaYang/master
         // 并为每个卡片分配一个id
         var dom="";
         var len = this.quesSet.length;
@@ -142,10 +151,17 @@ var PReceiver ={
                     QReceiver.setTarget("#" + name);
                     QReceiver.insertQuestions();
                 }
+<<<<<<< HEAD
                     // }else if(searchType==="paper"){
                     //     PReceiver.getPapers(result);
                     //     PReceiver.insertPapers();
                     // }
+=======
+                // }else if(searchType==="paper"){
+                //     PReceiver.getPapers(result);
+                //     PReceiver.insertPapers();
+                // }
+>>>>>>> refs/remotes/EmiyaYang/master
 
             });
 
@@ -163,6 +179,7 @@ var PReceiver ={
 $(function(){
 
     //ajax
+<<<<<<< HEAD
 	$("#go-search").click(function(){
 		var searchType;
 		if($("#paper").is(":checked")){
@@ -184,6 +201,29 @@ $(function(){
 			dataType:"json",
 			success:function(result){
 			    if(searchType==="paper") {
+=======
+    $("#go-search").click(function(){
+        var searchType;
+        if($("#paper").is(":checked")){
+            searchType = "paper";
+        } else{
+            searchType="question";
+        }
+
+
+        $.ajax({
+            type:"POST",
+            url:"/SearchServlet.do",
+            timeout:5000,
+            data:{
+                type:searchType,
+                keyword:$("#searchByWord").val(),
+                sort:$("sortWay").val()
+            },
+            dataType:"json",
+            success:function(result){
+                if(searchType==="paper") {
+>>>>>>> refs/remotes/EmiyaYang/master
                     PReceiver.getPapers(result);
                     PReceiver.setTarget("#main-result");
                     PReceiver.insertPapers();
@@ -194,13 +234,22 @@ $(function(){
                 //     PReceiver.insertPapers();
                 // }
                 else{
+<<<<<<< HEAD
                    console.log("没有选择搜索目标类型")
+=======
+                    console.log("没有选择搜索目标类型")
+>>>>>>> refs/remotes/EmiyaYang/master
                 }
 
             }
 
+<<<<<<< HEAD
 		});
 	});
+=======
+        });
+    });
+>>>>>>> refs/remotes/EmiyaYang/master
 
 
 })

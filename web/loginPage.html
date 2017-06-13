@@ -1,77 +1,102 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0。。。 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title>用户登录</title>
+	<title>登录/注册</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="loader/loaders.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/cssForLoginPage.css">
 
 	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="loader/loaders.css.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/jsForLoginPage.js" type="text/javascript"></script>
+
+
 </head>
 <body >
 
+
 <div class="container-fluid" id="logoDiv"><img class="center-block" src="image/LOGO.png" alt="logo"/></div>
 
-<div class="container-fluid" style="max-width: 400px; min-width: 300px;border-radius: 5px;">
-	<ul class="nav nav-tabs text-center" style="-webkit-margin-before:0;" role="tasklist">
-		<li id="list-item-1" class="active" style="width: 50%; margin: 0;"><a href="#sign-in-panel" role="tab" data-toggle="tab">登录</a></li>
-		<li id="list-item-2" style="width: 50%"><a href="#sign-up-panel" role="tab" data-toggle="tab">注册</a></li>
-	</ul>
-		
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="margin-top: 10%;">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="loader-inner ball-pulse">加载中...</div>
+            </div>
+        </div>
+    </div>
 </div>
-	
-<div class="container-fluid myContainer" style="position:relative; ">
+
+<div class="container-fluid myContainer" style="position:relative; border-radius: 8px">
+    <!--标签栏-->
+    <div class="container-fluid myContainer" style=" max-width: 400px; min-width: 300px;border-radius: 5px;">
+        <ul class="nav nav-tabs text-center" style="-webkit-margin-before:0;" role="tasklist">
+            <li id="list-item-1" class="list-item active" ><a id="a1" href="#sign-in-panel" role="tab" data-toggle="tab"  style="margin-right: 0">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</a></li>
+            <li id="list-item-2" class="list-item"><a id="a2" href="#sign-up-panel" role="tab" data-toggle="tab" style="margin-right: 0">注&nbsp;册</a></li>
+        </ul>
+    </div>
 	<div class="tab-content">
         <!--登录面板-->
 		<div class="tab-pane active fade in" id="sign-in-panel">
 			<form role="form" class="myform" action="" method="POST"><input type="hidden" name="type" value="sign-in" />
 			  <div class="form-group container-fluid">
-			  	<div class="input-group row" id="sign-in-email-div">
+			  	<div class="input-group row" id="sign-in-email-div" data-container="body" data-animation="true" data-toggle="popover" data-content="请输入正确的邮箱地址。">
 			  		<span class="input-group-addon " id="sign-in-email-button">@</span>
 			  	    <input type="text" class="form-control input-lg" id="sign-in-email" placeholder="Your e-mail" name="signInEmail">
 			  	</div>
-                <div class="row"><span class="help-block">Waring text</span></div>
-			 	<div class="input-group row" id="sign-in-password-div">
+                <div class="row reminder"><span class="help-block sign-in-help">Waring text</span></div>
+			 	<div class="input-group row" id="sign-in-password-div" data-container="body" data-animation="true" data-toggle="popover" data-content="请输入6到12位字符作为密码。">
                     <span  class="input-group-addon  mySpan " id="sign-in-password-button"><span class="glyphicon glyphicon-eye-open" ></span></span>
 			 		<input type="password" class="form-control input-lg" id="sign-in-password" placeholder="Your password" name="signInPassword">
 			 	</div>
-                <div class="row"><span class="help-block">Waring text</span></div>
-                <div class="row"><button type="button" class="btn btn-lg btn-primary" >登	录</button></div>
-                <div class="row text-right"><span><a href="#" >忘记密码</a></span></div>
+                <div class="row reminder"><span class="help-block sign-in-help">Waring text</span></div>
+                <div class="row text-right"><span id="password-forget"><a href="#" style="text-decoration: underline" >忘记密码？</a></span></div>
 			  </div>
+            <div  class="panel-footer ">
+                <button type="button" class="text-left btn btn-lg btn-primary myBtn" style="padding:0;text-align: start; font-size:15px;letter-spacing: 0.9em;word-spacing: 5em;text-indent: 2em">LOGIN&nbsp;&nbsp;IN&raquo;</button>
+                <!--<div class="loaders">-->
+                <div style="display: none" class="loader center-block"><div class="ball-clip-rotate"><div style="height: 35px; width: 35px; display: block; margin: 0.5em auto;"></div></div></div>
+                <!--</div>-->
+            </div>
             </form>
 		</div>
 
 		<!-- 注册面板-->
 		<div class="tab-pane fade" id="sign-up-panel">
 			<form  role="form" action=""  class="myform" method="POST">  <input type="hidden" name="type" value="sign-up" />
-			  <div class="form-group has-feedback container-fluid" id="sign-in-form" >
-			  	<div class="input-group row" id="sign-up-email-div">
+			  <div class="form-group has-feedback container-fluid" id="sign-up-form" >
+			  	<div class="input-group row" id="sign-up-email-div" data-container="body" data-toggle="popover" data-animation="true" data-content="请输入正确的邮箱地址。">
                     <span class="input-group-addon " id="sign-up-email-button">@</span>
 			  	    <input type="text" class="form-control input-lg form-default" name="signUpEmail" id="sign-up-email" placeholder="Input e-mail" aria-describedby="inputSuccess1Status">
                     <span  class="status-span glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="inputSuccess1Status" class="sr-only">(success)</span>
 			  	</div>
-                <div class="row"><span class="help-block">Waring text</span></div>
-			 	<div class="input-group row" id="sign-up-password-div">
+                <div class="row reminder"><span class="help-block sign-up-help">Warning text</span></div>
+			 	<div class="input-group row" id="sign-up-password-div" data-container="body" data-toggle="popover" data-animation="true" data-content="请输入6到12位字符作为密码。">
                     <span  class="input-group-addon  mySpan " id="sign-up-password-button"><span class="glyphicon glyphicon-eye-open" ></span></span>
 			 		<input type="password" class="form-control input-lg" id="sign-up-password" name="signUpPassword" placeholder="Input password" aria-describedby="inputSuccess2Status" >
                     <span class="status-span glyphicon  form-control-feedback" aria-hidden="true"></span>
                     <span id="inputSuccess2Status" class="sr-only">(success)</span>
 			 	</div>
-                <div class="row"><span class="help-block">Waring text</span></div>
-			 	<div class="input-group row" id="sign-up-password-div-confirm">
+                <div class="row reminder"><span class="help-block sign-up-help">Warning text</span></div>
+			 	<div class="input-group row" id="sign-up-password-div-confirm" data-container="body"  data-animation="true" data-toggle="popover" data-content="请再确认一次密码。">
                     <span  class="input-group-addon  mySpan " id="sign-up-password-button-confirm"  aria-describedby="inputSuccess3Status"><span class="glyphicon glyphicon-eye-open" ></span></span>
 
                     <input type="password" class="form-control input-lg" id="sign-up-password-confirm" placeholder="Confirm your password">
                     <span class="status-span glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="inputSuccess3Status" class="sr-only">(success)</span>
 			 	</div>
-                <div class="row"><span class="help-block">Waring text</span></div>
-                <div class="row"><button type="button" class="btn btn-lg btn-primary">注   册</button></div>
+                <div class="row reminder"><span class="help-block sign-up-help">Waring text</span></div>
               </div>
+                <div class="panel-footer">
+                    <button type="button" class="text-left btn btn-lg btn-primary myBtn" style="text-align: start; padding: 0; text-indent: 2em;font-size: 15px;letter-spacing: 0.9em;word-spacing: 5.3em">SIGN&nbsp;&nbsp;UP&raquo;</button>
+                    <div style="display: none" class="loader center-block"><div class="ball-clip-rotate"><div style="height: 35px; width: 35px; display: block; margin: 0.5em auto;"></div></div></div>
+                </div>
             </form>
         </div>
     </div>

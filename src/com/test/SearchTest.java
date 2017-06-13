@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+<<<<<<< HEAD
 
 /**
  * Created by ssHss on 2017/5/30.
@@ -19,6 +20,10 @@ import java.util.regex.Pattern;
 public class SearchTest implements SearchLogic {
 
 
+=======
+public class SearchTest implements SearchLogic {
+
+>>>>>>> refs/remotes/EmiyaYang/master
     @Override
     public List<PaperBean> getPaperBean(String keyword, int sortway)  {
         List<PaperBean> ans = new ArrayList<>();
@@ -26,7 +31,11 @@ public class SearchTest implements SearchLogic {
         Data data;
         try {
             data = jsonManger.loadDataFormJson();
+<<<<<<< HEAD
             Pattern pattern =Pattern.compile(keyword,Pattern.CASE_INSENSITIVE);
+=======
+            Pattern pattern = Pattern.compile(keyword,Pattern.CASE_INSENSITIVE);
+>>>>>>> refs/remotes/EmiyaYang/master
             Matcher matcher;
             for(int i=0;i<data.getPAPER().size();i++){
                 matcher = pattern.matcher(data.getPAPER().get(i).getName());
@@ -55,8 +64,14 @@ public class SearchTest implements SearchLogic {
                     ans.add(data.getQUESTION().get(i));
                 }
             }
+<<<<<<< HEAD
         }catch (UnsupportedEncodingException e){}
 
+=======
+        }catch (UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+>>>>>>> refs/remotes/EmiyaYang/master
 
         return ans;
     }

@@ -1,7 +1,11 @@
 package com.servlet;
 
 import com.entity.UserTransferBean;
+<<<<<<< HEAD
 import com.model.Interfaces.InforLogic;
+=======
+import com.model.Interfaces.InfoLogic;
+>>>>>>> refs/remotes/EmiyaYang/master
 import com.utills.ModelHelper;
 
 import javax.servlet.ServletException;
@@ -27,8 +31,13 @@ public class userCenterServlet extends HttpServlet {
         UserTransferBean userTransferBean = (UserTransferBean)session.getAttribute("loginUser");
         int id = userTransferBean.getId();
 
+<<<<<<< HEAD
         InforLogic inforLogic = ModelHelper.getInforgicTest();
         inforLogic.updateInfor(id,newName,newSignature);
+=======
+        InfoLogic infoLogic = ModelHelper.getInforgicTest();
+        infoLogic.updateInfor(id,newName,newSignature);
+>>>>>>> refs/remotes/EmiyaYang/master
 
         userTransferBean.setName(newName);
         userTransferBean.setSignature(newSignature);

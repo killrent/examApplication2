@@ -13,6 +13,18 @@
     </servlet-mapping>
 
     <servlet>
+<<<<<<< HEAD
+=======
+        <servlet-name>signOutServlet</servlet-name>
+        <servlet-class>com.servlet.signOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>signOutServlet</servlet-name>
+        <url-pattern>/signOutServlet.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+>>>>>>> refs/remotes/EmiyaYang/master
         <servlet-name>userCenterServlet</servlet-name>
         <servlet-class>com.servlet.userCenterServlet</servlet-class>
     </servlet>
@@ -21,6 +33,19 @@
         <url-pattern>/userCenterServlet.do</url-pattern>
     </servlet-mapping>
 
+<<<<<<< HEAD
+=======
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>com.servlet.SearchServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/SearchServlet.do</url-pattern>
+    </servlet-mapping>
+
+>>>>>>> refs/remotes/EmiyaYang/master
 
     <filter>
         <filter-name>userAccess</filter-name>

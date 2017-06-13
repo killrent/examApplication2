@@ -11,7 +11,11 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/cssForSearch.css">
 	<script src="js/search.js"></script>
+<<<<<<< HEAD
 	<script type="text/javascript">
+=======
+    <script type="text/javascript">
+>>>>>>> refs/remotes/EmiyaYang/master
 
         (function ($) {
             $.getUrlParam = function (name) {
@@ -21,7 +25,11 @@
                     return decodeURI(r[2]);
                 return null;
 			}
+<<<<<<< HEAD
 		})(jQuery)
+=======
+		})(jQuery);
+>>>>>>> refs/remotes/EmiyaYang/master
 
 		function haveScroll(){
 			var haveScroll=0;
@@ -39,7 +47,11 @@
                 if((a-c)>200)
                     $("#search-results-wrapper .tab-pane").height(a-c-10);
             }else{
+<<<<<<< HEAD
                 var b = $("#search-results-wrapper .tab-pane").height()+Math.abs($(document.body).height()-$(window).height())
+=======
+                var b = $("#search-results-wrapper .tab-pane").height()+Math.abs($(document.body).height()-$(window).height());
+>>>>>>> refs/remotes/EmiyaYang/master
                 $("#search-results-wrapper .tab-pane").height(b-10);
             }
 		}
@@ -67,7 +79,10 @@
 			getParam();
 			$("#searchByType label:first-child").button("toggle");
 
+<<<<<<< HEAD
 			
+=======
+>>>>>>> refs/remotes/EmiyaYang/master
 			//初始化调整
             changeHeight();
 
@@ -80,7 +95,10 @@
                 changeHeight();
             })
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/EmiyaYang/master
             //类型绑定
             $("#searchByType label").click(function(){
                 var text = $(this).attr("value");
@@ -118,13 +136,24 @@
 			});
 
 		})
+<<<<<<< HEAD
 
 
 	</script>  
+=======
+	</script>
+>>>>>>> refs/remotes/EmiyaYang/master
 
 
 </head>
 <body>
+<<<<<<< HEAD
+=======
+	<script type="text/javascript" src="js/header.js"></script>
+
+    <div style="height: 100px;"></div>
+
+>>>>>>> refs/remotes/EmiyaYang/master
 	<div class="container">
 		<div class="row">
 			<!-- 侧边搜索栏 -->
@@ -156,6 +185,7 @@
 							</div><!-- form-group -->
 							
 							<div id="searchBySubject" class="form-group">
+<<<<<<< HEAD
 								<!-- <label for="searchBySubject">科目</label>
 								<select id="searchBySubject" class="form-control">
 							      <option>未指定</option>
@@ -164,6 +194,8 @@
 							      <option>4</option>
 							      <option>5</option>
 							    </select> --> 
+=======
+>>>>>>> refs/remotes/EmiyaYang/master
 							    <label>科目类型</label>
 							    <div class="radio">
 								  <label>
@@ -240,5 +272,11 @@
 			</div><!-- col-xs-9 -->
 		</div><!-- row -->
 	</div><!-- container -->
+<<<<<<< HEAD
+=======
+
+    <script type="text/javascript" src="js/footer.js"></script>
+
+>>>>>>> refs/remotes/EmiyaYang/master
 </body>
 </html>
