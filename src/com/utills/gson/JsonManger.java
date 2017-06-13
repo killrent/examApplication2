@@ -12,16 +12,23 @@ public class JsonManger {
 
     public void saveDataIntoJson(Data data) throws IOException {
 
+
         //将Java对象序列化
         Gson gson = new GsonBuilder().create();
         String sets = gson.toJson(data);
         System.out.print(sets);
 
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(DATA_PATH), "UTF-8"));
+        BufferedWriter out = null;
+        try {
+            out = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(DATA_PATH), "UTF-8"));
+            out.write(sets);
+            out.close();
 
-        out.write(sets);
-        out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

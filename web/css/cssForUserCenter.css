@@ -9,14 +9,11 @@ form.form-horizontal input{
     margin-bottom: 1em;
 }
 
-<<<<<<< HEAD
-=======
 .panel-content{
     min-height: 220px;
 }
 
 h2 small{
-    text-decoration: underline;
     color: #23527c;
 }
 
@@ -25,4 +22,10 @@ h2 small{
     color:#afafaf !important;
     cursor:default
 }
->>>>>>> refs/remotes/EmiyaYang/master
+#record-empty{
+    position: absolute;
+    margin: 60px;
+    color: #555;
+    display: none;
+}
+

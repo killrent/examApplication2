@@ -39,7 +39,7 @@ $(document).ready(function () {
                     $(this).css('display','block');
                     $(this).find('.exam-name').html(paper[i].name);
                     $(this).find('li[title=点击量]').append(paper[i].click);
-                    $(this).find('li[title=正确率]').append(record[i].accuracy * 100 + '%');
+                    $(this).find('li[title=正确率]').append((record[i].accuracy * 100).toFixed(2) + '%');
 
                     var $time = $(this).find('.exam-time');
                     var stringTime = record[i].time;
@@ -64,11 +64,17 @@ $(document).ready(function () {
                 }
             });
 
+            console.log(paper.length);
+
+            if(paper.length === 0){
+                $('#record-empty').css('display','block');
+            }
+
             //加载全部考试记录
 
             var $table = $('#record-infor').find('table');
             $.each(record,function (i, val) {
-                $table.append("<tr><td>"+ (i + 1) +"</td>" + "<td>"+ paper[i].name +"</td>" + "<td>"+ record[i].timeUsed +"</td>"+ "<td>"+record[i].time +"</td>"+ "<td>"+(record[i].accuracy*100) +"%</td>"+ "<td>"+paper[i].click +"</td></tr>");
+                $table.append("<tr><td>"+ (i + 1) +"</td>" + "<td>"+ paper[i].name +"</td>" + "<td>"+ record[i].time +"</td>"+ "<td>"+record[i].timeUsed +"</td>"+ "<td>"+(record[i].accuracy * 100).toFixed(2) +"%</td>"+ "<td>"+paper[i].click +"</td></tr>");
             });
         },
         error:function () {

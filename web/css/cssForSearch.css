@@ -1,5 +1,27 @@
 @charset "utf-8";
 
+body{
+	background-color: #00cc99 !important;
+}
+
+.main > .row{
+    margin-top:80px;
+}
+
+#result-sider{
+    margin-bottom:20px ;
+}
+
+#main-result{
+    background-color: white;
+    border-bottom-left-radius: 7px;
+}
+
+.paper-question{
+    background-color: white;
+}
+
+
 #search-sider .btn-primary {
 	color: #fff;
 	background-color: #00AA88;
@@ -21,10 +43,11 @@
 }
 
 .question-title{
-	height: 2em;
+	height: 1.5em;
 	overflow:hidden;
-	margin-bottom:10px; 
 }
+
+
 
 #searchTabsWrapper .label{
 	font-size: 1em;
@@ -45,10 +68,26 @@
 	height: 650px;
 }
 
-.glyphicon-plus:hover{
+.glyphicon:hover{
 	opacity: 0.5;
+    cursor: pointer;
+    cursor: hand;
 }
 
+.panel-title:hover, .question-panel:hover {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.question-panel .panel-heading{
+    border-color: #00cc99;
+    color: #2b542c;
+    background: transparent;
+}
+
+.panel-title{
+    overflow: hidden;
+}
 
 #search-results-wrapper .btn-block{
 	background-color: transparent;
@@ -57,20 +96,24 @@
 #my-tab-content .panel{
 	margin: 10px;
 }
+
+.paper-panel{
+
+}
 /*标签页css设置*/
 
 /*标签页边框*/
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-    border: 1px solid #4BBE8D;
-    border-bottom:1px solid white;
+	/*border: 1px solid #4BBE8D;*/
+	/*border-bottom:1px solid white;*/
+    border: none !important;
 }
 /*标签下线*/
 .nav-tabs {
-    border-bottom: 1px solid #4BBE8D;
+	/*border-bottom: 5px solid white;*/
 }
 
 #search-results-wrapper .tab-pane{
-	border: 1px solid #4BBE8D;
+	/*border: 5px solid white;*/
 	border-top-style: none;
 }
-

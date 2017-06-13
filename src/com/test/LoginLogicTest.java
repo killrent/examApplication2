@@ -24,7 +24,10 @@ public class LoginLogicTest implements LoginLogic {
     private JsonManger jsonManger;
 
     public LoginLogicTest() {
+        init();
+    }
 
+    private void init(){
         jsonManger = new JsonManger();
 
         try {
@@ -43,6 +46,8 @@ public class LoginLogicTest implements LoginLogic {
     @Override
     public boolean checkEmail(String email) {
 
+        init();
+
         for(UserBean x: user){
             if(email.equals(x.getEmail()))
                 return true;
@@ -54,11 +59,13 @@ public class LoginLogicTest implements LoginLogic {
     @Override
     public UserTransferBean signUp(String email, String password) {
 
+        init();
+
         if(email == null || password == null) return null;
 
-        user.add(new UserBean(user.size(),"新人驾到",email,password,"新兵上任三桶水！"));
+        user.add(new UserBean(user.size() + 1,"新人驾到",email,password,"新兵上任三桶水！"));
 
-        UserTransferBean userTransferBean = new UserTransferBean(user.size() + 1,"新人驾到",email,"新兵上台三桶水！",null,null);
+        UserTransferBean userTransferBean = new UserTransferBean(user.size(),"新人驾到",email,"新兵上台三桶水！",null,null);
 
         try {
             jsonManger.saveDataIntoJson(data);
@@ -71,6 +78,8 @@ public class LoginLogicTest implements LoginLogic {
 
     @Override
     public UserTransferBean signIn(String email, String password) {
+
+        init();
 
         List<UserRPaper> record;
 

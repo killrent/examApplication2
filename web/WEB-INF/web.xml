@@ -13,8 +13,33 @@
     </servlet-mapping>
 
     <servlet>
-<<<<<<< HEAD
-=======
+        <servlet-name>infoServlet</servlet-name>
+        <servlet-class>com.servlet.infoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>infoServlet</servlet-name>
+        <url-pattern>/infoServlet.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SubmissionServlet</servlet-name>
+        <servlet-class>com.servlet.SubmissionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SubmissionServlet</servlet-name>
+        <url-pattern>/SubmissionServlet.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ExaminationServlet</servlet-name>
+        <servlet-class>com.servlet.ExaminationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExaminationServlet</servlet-name>
+        <url-pattern>/ExaminationServlet.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>signOutServlet</servlet-name>
         <servlet-class>com.servlet.signOutServlet</servlet-class>
     </servlet>
@@ -22,9 +47,7 @@
         <servlet-name>signOutServlet</servlet-name>
         <url-pattern>/signOutServlet.do</url-pattern>
     </servlet-mapping>
-
     <servlet>
->>>>>>> refs/remotes/EmiyaYang/master
         <servlet-name>userCenterServlet</servlet-name>
         <servlet-class>com.servlet.userCenterServlet</servlet-class>
     </servlet>
@@ -32,21 +55,14 @@
         <servlet-name>userCenterServlet</servlet-name>
         <url-pattern>/userCenterServlet.do</url-pattern>
     </servlet-mapping>
-
-<<<<<<< HEAD
-=======
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>com.servlet.SearchServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/SearchServlet.do</url-pattern>
     </servlet-mapping>
-
->>>>>>> refs/remotes/EmiyaYang/master
-
     <filter>
         <filter-name>userAccess</filter-name>
         <filter-class>com.servlet.filter.legalAccess</filter-class>
