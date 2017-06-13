@@ -4,6 +4,7 @@ import com.entity.UserTransferBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.model.Interfaces.InfoLogic;
 import com.utills.ModelHelper;
 import com.model.Interfaces.LoginLogic;
 import net.sf.json.JSONException;
@@ -60,6 +61,7 @@ public class control extends HttpServlet {
     private void setJSON(JSONObject status, HttpServletRequest request) throws JSONException {
 
         LoginLogic loginLogic = ModelHelper.getLoginLogic();
+        InfoLogic infoLogic = ModelHelper.getInforgic();
         HttpSession session = request.getSession();
         UserTransferBean userTransferBean = null;
 
@@ -98,6 +100,9 @@ public class control extends HttpServlet {
                     status.put("email",session.getAttribute("loginEmail"));
 
                     userTransferBean = (UserTransferBean) session.getAttribute("loginUser");
+
+                    //更新考试记录
+                    infoLogic.loadRecord(userTransferBean);
 
                     status.put("userObj",userTransferBean);
 

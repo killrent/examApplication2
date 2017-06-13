@@ -31,5 +31,5 @@ public class ModelHelper {
         return getInstance().loginLogic;
     }
 
-    public static InfoLogic getInforgicTest(){ return getInstance().infoLogic; }
+    public static InfoLogic getInforgic(){ return getInstance().infoLogic; }
 }

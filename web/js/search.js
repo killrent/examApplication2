@@ -19,43 +19,33 @@ var QReceiver ={
         var len = this.quesSet.length;
         var id ="ques-card-"+this.getQuesId();
 
-
         function printOptions(options) {
             var chars = ["A","B","C","D","E","F","G"]
             var result="";
             for (var j=0;j<options.length;j++){
-                result += chars[i]+"."+options[j]+"<br>"
+                result += chars[j]+"."+options[j]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
             };
             return result;
         }
         for(var i=0;i<len;i++){
-
-
             dom = "\
-            <div class=\"panel panel-info\">\
+            <div class=\" panel question-panel panel-info\" data-toggle=\"collapse\"  href=\"#" + id + "\">\
                 <div class=\"panel-heading\" >\
                     <div class=\"row\">\
-                        <div class=\"question-title col-xs-11\" >"+this.quesSet[i].content+"</div>\
+                        <div class=\"question-title col-xs-11\" >" + (i+ 1) + ".&nbsp;"+ this.quesSet[i].content+"</div>\
                         <div class=\"glyphicon glyphicon-plus col-xs-1\" title=\"添加到收藏\"></div>\
                     </div>\
-                    <div class=\"btn btn-block btn-default text-center\" data-toggle=\"collapse\" href=\"#" + id + "\"><span class=\"glyphicon glyphicon-circle-arrow-down\"></span></div>\
-                </div>\
-                <div id=\"" + id + "\" class=\"panel-collapse collapse\">\
-                    <div class=\"row text-center\">\
-                        <div class=\"col-xs-4\"><span class=\"glyphicon glyphicon-user\"></span>：<a class=\"ques-author\">XXX</a></div>\
-                        <div class=\"col-xs-4\"><span class=\"glyphicon glyphicon-time\"></span>：<span class=\"ques-time\">2017-5-12</span></div>\
-                        <div class=\"col-xs-4\"><span class=\"glyphicon glyphicon-bookmark\"></span>：<span class=\"ques-subject\">JAVA</span></div>\
+                    <div id=\"" + id + "\" class=\"row panel-collapse collapse\">\
+                        <div class=\"row text-left\">\
+                        "+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ printOptions(this.quesSet[i].items)+"\
+                        </div>\
                     </div>\
-                    "+ printOptions(this.quesSet[i].items)+"\
                 </div>\
             </div>";
 
             $(this.target).append(dom);
             id ="ques-card-"+this.getQuesId();
         }
-
-
-
     }
 }
 
@@ -82,24 +72,20 @@ var PReceiver ={
 
         for(var i =0;i<this.paperSet.length;i++){
             card = "\
-                <div  class=\"panel panel-default\">\
+                <div  class=\"panel panel-default paper-panel\">\
                     <div class=\"panel-body\">\
                         <div class=\"row\">\
-                            <div class=\"paper-name col-xs-11\">"+this.paperSet[i].name+"</div>\
-                            <div class=\"col-xs-1 glyphicon glyphicon-plus\"></div>\
-                        </div>\
-                    </div>\
-                    <div class=\"panel-footer\">\
-                        <div class=\"row\">\
-                            <div class=\"col-xs-2 \"><div class=\"btn btn-default  do-test\"  >立即考试</div></div>\
-                            <div class=\"col-xs-2\"><div class=\"btn btn-default  look-detail\" data-paper-id=\""+this.paperSet[i].id+"\">查看试题</div></div>\
+                            <div class=\"col-xs-1 glyphicon glyphicon-star-empty\"></div>\
+                            <div class=\"paper-name col-xs-4\"  data-paper-id="+ this.paperSet[i].id + "><a href='#'>"+this.paperSet[i].name+"</a></div>\
+                            <div class='paper-brief col-xs-6' >" + this.paperSet[i].brief  + "</div>\
+                            <a href='examination-templete.html?paperId="+ this.paperSet[i].id  +"'><div class=\"col-xs-1 glyphicon glyphicon-chevron-right\"></div></a>\
                         </div>\
                     </div>\
                 </div>";
             $(this.target).append(card);
         }
 
-        $(".look-detail").click(function () {
+        $(".paper-name").click(function () {
             //存放标签页的id
             var searchType;
             if($("#paper").is(":checked")){
@@ -119,7 +105,7 @@ var PReceiver ={
             </li> ";
             //标签内容html
             var tabPane = "\
-            <div id=\""+name+"\" class=\"tab-pane fade active\" >\
+            <div id=\""+name+"\" class=\"paper-question tab-pane fade active\" >\
             </div>";
             //将其加入标签区域
             $("#tabs").append(tab);
@@ -156,7 +142,7 @@ var PReceiver ={
             })
         })//.look-detail的绑定结束
     }
-}
+};
 
 $(function(){
 
@@ -168,7 +154,6 @@ $(function(){
         } else{
             searchType="question";
         }
-
 
         $.ajax({
             type:"POST",
@@ -201,4 +186,46 @@ $(function(){
     });
 
 
-})
+});
+
+var userId;
+
+$(document).ready(function () {
+
+    var $ul0 = $('.ul-state:eq(0)');
+    var $ul1 = $('.ul-state:eq(1)');
+    var $a = $('#user-href');
+
+    $.ajax({
+        url:"controlServlet.do",
+        data:{type:'getAccess'}, //传输键值对
+        aysnc:true,
+        cache:false,
+        type:'POST',
+        dataType:'json',
+        success:function (data) {
+
+            var email = data.email;
+
+            var obj = data.userObj;
+
+            userId = obj.id;
+
+            var javaObj = data.javaObj;
+
+            console.log(javaObj);
+
+            if(email !== undefined){
+                $ul0.css("display","none");
+                $ul1.css("display","block");
+                $a.html(obj.name);
+            }else {
+                $ul0.css("display","block");
+                $ul1.css("display","none");
+            }
+        },
+        error:function () {
+            alert('服务器无响应，错误信息为'+ arguments[1]);
+        }
+    });
+});

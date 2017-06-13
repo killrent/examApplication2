@@ -24,10 +24,12 @@ public class userCenterServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
+        //重新加载用户信息
         UserTransferBean userTransferBean = (UserTransferBean)session.getAttribute("loginUser");
+
         int id = userTransferBean.getId();
 
-        InfoLogic infoLogic = ModelHelper.getInforgicTest();
+        InfoLogic infoLogic = ModelHelper.getInforgic();
         infoLogic.updateInfor(id,newName,newSignature);
 
         userTransferBean.setName(newName);

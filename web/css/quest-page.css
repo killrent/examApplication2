@@ -12,6 +12,20 @@ body {
     sans-serif;
 }
 
+.right-top{
+    float: right;
+}
+
+.badge-correct{
+    font-size: medium;
+    background-color: #FF0000;
+    color: #000;
+}
+.badge-false {
+    font-size: medium;
+    background-color: #00CC00;
+    color: #000;
+}
 .jumbotron {
     background: #fff;
 }
@@ -132,9 +146,9 @@ body {
 }
 
 /*.affix-top, .affix, .affix-   bottom{*/
-    /*max-height: 45%;*/
-    /*overflow-y: auto;*/
-    /*width: inherit;*/
+/*max-height: 45%;*/
+/*overflow-y: auto;*/
+/*width: inherit;*/
 /*}*/
 
 .affix-top, .affix, .affix-bottom {
@@ -142,8 +156,8 @@ body {
     width: 280px;
 }
 
-.ball-spin-fade-loader > div{
-    background-color: black;
+.ball-spin-fade-loader > div {
+    background-color: #000;
 }
 
 .btn-default.active,
