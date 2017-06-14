@@ -9,67 +9,162 @@
 	<script src="js/jquery-3.2.1.min.js"></script>	
 	<script src="js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
+
 	<style>
-		.col-xs-12,.col-sm-6, .col-lg-3,.col-md-4{
-			padding: 0px;
-			margin: 30px;
+		body{
+			/*background-color: #1b6d85;*/
+			/*background-color:#33AAAA;*/
+			/*background-color:#4BBE8D;*/
+			/*background-color:#3D9970;*/
+			/*background-color:#00876a;*/
+			background-color:#00AA88;
+			color:#fff;
+		}
+		.page-header {
+			border-bottom: 2px solid #fff;
 		}
 		.paperCard{
-			margin: 15px;
+			padding: 0;
+			margin: 30px auto;
 			height:300px;
 			width:260px;
-			box-shadow: 5px 5px 5px 1px #888888;
-			border:1px solid gray  ;
-			border-radius:10px;
+			box-shadow: 15px 15px 15px 1px #666;
+			border-radius:7px;
 			overflow: hidden;
 		}
-		.imgWarpper{
+		.imgWrapper{
 			height:70%;
 			width:100%;
 			overflow: hidden;
-			background-image: url("image/test.jpg");
-			box-shadow:0 -10px 30px 10px rgb(255,255,255) inset;
-			
+			background-image: url(image/test.jpg);
+			background-size:100% 100%;
+			box-shadow: 0 -10px 20px 0px #555 inset;
+			/*尝试遮罩层*/
 		}
-		/*.paperImg{
-			box-shadow:0 -10px 30px 10px rgb(255,255,255) inset;
-		}*/
+
+		.imgWrapper .fade-text{
+			width:100%;
+			height:100%;
+			background:rgba(0,0,0,0.6);
+			position:relative;
+			top:0px;
+			left:0px;
+			display:none;
+			font-size:16px;
+			text-align:center;
+			color:white;
+			/*新添加*/
+			/*box-shadow:0 -10px 30px 10px rgb(255,255,255) inset;*/
+			padding:10px;
+			/*line-height: 200px;*/
+		}
+		.imgWrapper:hover .fade-text{
+			display:block;
+		}
+		.paperInf{
+			height: 30%;
+			background-color: #555;
+			color:#fff;
+		}
+		.paperInf h4{
+			padding-top: 10px;
+			margin-top: 0;
+		}
+		.paperInf a{
+			display: inline-block;
+			width: 80%;
+			white-space: nowrap;
+			overflow: hidden;
+			color:#00AA88;
+		}
 	</style>
+	<script src="js/paper.js"></script>
 </head>
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 paperCard">
-				<div class="imgWarpper">
-					 <!-- <img class="img-responsive img-rounded paperImg" src="img/test.jpg" alt="" > -->
-				</div> 
-				<div class="paperInf">
-					<div class="paperTitle text-center"><h4><a class="look-detail" href="search.html?keyword=JAVA期末考卷&type=paper" target="_blank">JAVA期末考卷</a></h4></div>
-					<div class="row"> 
-						<div class="questionNum col-xs-6 text-center"><h5>10道题</h5></div>
-						<div class="answerNum col-xs-6 text-center"><h5>0个人已做</h5></div>
-						</div>
+		<div class="text-center page-header"><h2>Enimaxe题库</h2></div>
+
+		<div id="paper-area" class="row">
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
+				<div class ="paperCard">
+					<div class="imgWrapper">
+						<div class="fade-text">威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威</div>
+					</div>
+
+					<div class="paperInf">
+						<div class="paperTitle text-center"><h4><a href="">JAVA期末考卷JAVA期末考卷JAVA期末考卷JAVA期末考卷</a></h4></div>
+						<div class="row">
+							<div class="questionNum col-xs-6 text-center"><h5>10道题</h5></div>
+							<div class="answerNum col-xs-6 text-center"><h5>0个人已做</h5></div>
+							</div>
+					</div>
 				</div>
 			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
+				<div class ="paperCard">
+					<div class="imgWrapper">
+						<div class="fade-text">威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威</div>
+					</div>
 
-			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 paperCard">
-				<div class="imgWarpper">
-					<!-- <img class="img-responsive img-rounded paperImg" src="img/test.jpg" alt="" > -->
+					<div class="paperInf">
+						<div class="paperTitle text-center"><h4><a href="">JAVA期末考卷</a></h4></div>
+						<div class="row">
+							<div class="questionNum col-xs-6 text-center"><h5>10道题</h5></div>
+							<div class="answerNum col-xs-6 text-center"><h5>0个人已做</h5></div>
+						</div>
+					</div>
 				</div>
-				<div class="paperInf">
-					<div class="paperTitle text-center"><h4><a class="look-detail" href="search.html?keyword=期中物理试卷&type=paper" target="_blank">期中物理试卷</a></h4></div>
-					<div class="row">
-						<div class="questionNum col-xs-6 text-center"><h5>10道题</h5></div>
-						<div class="answerNum col-xs-6 text-center"><h5>0个人已做</h5></div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
+				<div class ="paperCard">
+					<div class="imgWrapper">
+						<div class="fade-text">威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威</div>
+					</div>
+
+					<div class="paperInf">
+						<div class="paperTitle text-center"><h4><a href="">JAVA期末考卷</a></h4></div>
+						<div class="row">
+							<div class="questionNum col-xs-6 text-center"><h5>10道题</h5></div>
+							<div class="answerNum col-xs-6 text-center"><h5>0个人已做</h5></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
+				<div class ="paperCard">
+					<div class="imgWrapper">
+						<div class="fade-text">威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威</div>
+					</div>
+
+					<div class="paperInf">
+						<div class="paperTitle text-center"><h4><a href="">JAVA期末考卷</a></h4></div>
+						<div class="row">
+							<div class="questionNum col-xs-6 text-center"><h5>10道题</h5></div>
+							<div class="answerNum col-xs-6 text-center"><h5>0个人已做</h5></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
+				<div class ="paperCard">
+					<div class="imgWrapper">
+						<div class="fade-text">威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威威</div>
+					</div>
+
+					<div class="paperInf">
+						<div class="paperTitle text-center"><h4><a href="">JAVA期末考卷</a></h4></div>
+						<div class="row">
+							<div class="questionNum col-xs-6 text-center"><h5>10道题</h5></div>
+							<div class="answerNum col-xs-6 text-center"><h5>0个人已做</h5></div>
+						</div>
 					</div>
 				</div>
 			</div>
 
 
+			<script src="js/footer.js"></script>
+
 		</div><!-- row -->
 	</div><!-- container -->
-
-
 </body>
 </html>
